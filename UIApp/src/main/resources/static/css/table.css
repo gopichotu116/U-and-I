@@ -1,0 +1,17 @@
+th.edit {
+	color: navy;
+	font-weight: bolder;
+	font-size: x-large;
+	text-align: center;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+td{
+	text-align: center;
+	font-weight: bold;
+	font-size: 3lvb;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+.tdname{
+	max-width: 500px;
+}

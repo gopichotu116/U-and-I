@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<link>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Signup</title>
+
+<th:block th:insert="bootstrap.html"></th:block>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/signup.css}">
+
+</head>
+
+<body>
+	<div class="main">
+		<div class="signup">
+			<form action="#" th:action="@{/cust_signupwel}" th:object="${customer}" method="post" enctype="multipart/form-data">
+				<label for="chk" aria-hidden="true">Sign up</label>
+				<input type="text" th:field="*{name}" placeholder="Username" required="">
+				<input type="email" th:field="*{email}" placeholder="Email" required="">
+				<input type="password" th:field="*{password}" placeholder="Password" required="">
+				<input type="text" th:field="*{phno}" placeholder="(+91)MobileNo" required>
+				<input type="text" th:field="*{loc}" placeholder="Location" required>
+				<input type="file" name="file">
+				<button type="submit">Sign up</button>
+				<p id="p1">Already have an account? <a href="/customer_login">Login</a></p>
+			</form>
+		</div>
+
+	</div>
+</body>
+
+</html>

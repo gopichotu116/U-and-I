@@ -1,0 +1,102 @@
+     body {
+     	background-image: url("/images/shop4.jpg");
+
+     }
+
+     .main {
+
+     	width: 350px;
+     	height: 600px;
+     	/*background: rgb(112, 128, 224);*/
+     	background: #eee;
+     	/*overflow: hidden;*/
+     	border-radius: 10px;
+     	box-shadow: 5px 30px 50px black;
+     	position: relative;
+     	top: 0px;
+     	left: 470px;
+     }
+
+     .signup {
+     	position: relative;
+     	width: 100%;
+     	height: 100%;
+     }
+
+     label {
+     	color: cornflowerblue;
+     	font-size: 35px;
+     	justify-content: center;
+     	display: flex;
+     	margin: 60px;
+     	font-weight: bold;
+     	cursor: pointer;
+     	transition: .5s ease-in-out;
+     	margin-bottom: 10px;
+     }
+
+     input {
+     	width: 80%;
+     	height: 40px;
+     	background: white;
+     	justify-content: center;
+     	display: flex;
+     	margin: 18px auto;
+     	padding: 10px;
+     	border: none;
+     	outline: none;
+     	border-radius: 50px;
+     }
+
+     button {
+     	width: 60%;
+     	height: 40px;
+     	margin: 2px auto;
+     	justify-content: center;
+     	display: block;
+     	color: white;
+     	background: rgb(43, 83, 194);
+     	font-size: 20px;
+     	font-weight: bold;
+     	margin-top: 18px;
+     	outline: none;
+     	border: none;
+     	border-radius: 10px;
+     	transition: .3s ease-in;
+     	cursor: pointer;
+     	box-shadow: 5px 20px 40px black;
+     }
+
+     button:hover {
+     	background: rgb(20, 57, 105);
+     }
+
+
+     a {
+     	text-decoration: none;
+     	color: blue;
+     	font-family: 'Times New Roman', Times, serif;
+     	font-weight: bold;
+     	font-size: x-large;
+     }
+
+     #p2 {
+     	/* margin-top: 50px;
+    margin-left: 30px; */
+     	position: relative;
+     	top: 30px;
+     	left: 31px;
+     }
+
+     #p1 {
+     	position: relative;
+     	top: 20px;
+     	left: 65px;
+     	color: darkred;
+     }
+
+     #p3 {
+     	position: relative;
+     	top: 30px;
+     	left: 30px;
+     }

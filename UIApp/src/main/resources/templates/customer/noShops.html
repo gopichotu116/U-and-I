@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<link>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No shops</title>
+
+<th:block th:insert="bootstrap.html"></th:block>
+<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+
+<style>
+	.h1 {
+		text-align: center;
+		font-weight: bold;
+		font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		position: relative;
+		top: 10px;
+
+		overflow: hidden;
+	}
+
+</style>
+</head>
+
+<body>
+	<div th:replace="fragments/customerNavbar"></div>
+	<div class="h1">
+		<h1>No shops are available</h1>
+		<br>
+	</div>
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+</body>
+
+</html>

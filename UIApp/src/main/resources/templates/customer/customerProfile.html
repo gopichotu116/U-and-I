@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>My Profile</title>
+
+	<th:block th:insert="bootstrap.html"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+	
+	<style>
+
+		body {
+			background-image: url("/images/profile1.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+		}
+
+		.col-sm-4 {
+			font-size: large;
+			font-weight: bold;
+			font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		}
+
+		.btn {
+			color: #00C853;
+		}
+	</style>
+
+
+</head>
+
+<body>
+
+	<div th:replace="fragments/customerNavbar"></div>
+
+	<div class="container d-flex justify-content-center align-items-center" style="height: 10	0vh;">
+		<div class="card custom-card-bg d-flex" style="width: 30rem;">
+			<div class="card-body">
+				<div class="container d-flex justify-content-center align-items-center" style="height: 11vh;">
+					<!--<i class="far fa-user fa-6x"></i>-->
+					<img style="max-width: 100px; max-height: 100px;"
+						th:src="'data:image/jpeg;base64,' + ${profileImage}" class="profile-image rounded-circle"
+						alt="Profile Image">
+				</div>
+
+			</div>
+
+			<ul class="list-group list-group-flush">
+				<th:block th:each="cp :${customerProfile}">
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Id
+							</div>
+							<div class="col-sm-8" th:text="${cp.id}">
+								<!-- Display profile id -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Name
+							</div>
+							<div class="col-sm-8" th:text="${cp.name}">
+								<!-- Display profile name -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Email
+							</div>
+							<div class="col-sm-8" th:text="${cp.email}">
+								<!-- Display profile email -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Password
+							</div>
+							<div class="col-sm-8" th:text="${cp.password}">
+								<!-- Display profile password -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Phone No
+							</div>
+							<div class="col-sm-8" th:text="${cp.phno}">
+								<!-- Display profile department -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Location
+							</div>
+							<div class="col-sm-8" th:text="${cp.loc}">
+								<!-- Display profile department -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="container mb-3 d-flex justify-content-center align-items-center">
+							<div class="col-sm-4">
+								<button type="button" class="btn"><a style="color: green"
+										th:href="@{/editCustomerProfile/{id}(id=${cp.id})}">Edit profile</a>
+
+								</button>
+
+							</div>
+
+						</div>
+					</li>
+				</th:block>
+			</ul>
+
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+
+</body>
+
+</html>

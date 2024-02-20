@@ -1,0 +1,111 @@
+
+body{
+	background-image: url("/images/shop-1.jpg");
+	
+}
+
+.main {
+	position: relative;
+	top: 20px;
+	left: 470px;
+	width: 350px;
+	height: 450px;
+	background: #eee;
+	overflow: hidden;
+	border-radius: 10px;
+	box-shadow: 5px 30px 50px black;
+}
+
+#msg{
+	 color: white; 
+	 font-weight: bolder; 
+	 font-family: 'Times New Roman,Times, serif';
+}
+
+label {
+	color: rgb(43, 83, 194);
+	font-size: 35px;
+	justify-content: center;
+	display: flex;
+	margin: 60px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: .5s ease-in-out;
+	margin-bottom: 10px;
+}
+
+input {
+	width: 80%;
+	height: 45px;
+	background: white;
+	justify-content: center;
+	display: flex;
+	margin: 18px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 50px;
+}
+
+button {
+	width: 60%;
+	height: 40px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: white;
+	background: rgb(43, 83, 194);
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 18px;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	transition: .3s ease-in;
+	cursor: pointer;
+	box-shadow: 5px 20px 40px black;
+}
+
+button:hover {
+	background: rgb(20, 57, 105);
+}
+
+.signup {
+	height: 500px;
+	background: #eee;
+	border-radius: 60% / 10%;
+	transform: translateY(-180px);
+	transition: .8s ease-in-out;
+}
+
+.signup label {
+	/* text-align: center;
+    padding: 20px; */
+	color: #573b8a;
+	transform: scale(.6);
+}
+
+
+a {
+	text-decoration: none;
+}
+
+#p2 {
+	/* margin-top: 50px;
+    margin-left: 30px; */
+	position: relative;
+	top: 30px;
+	left: 31px;
+}
+
+#p1 {
+	position: relative;
+	top: 20px;
+	left: 65px;
+}
+
+#p3 {
+	position: relative;
+	top: 30px;
+	left: 30px;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Shops List</title>
+	<th:block th:insert="bootstrap.html"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+	<style>
+		body {
+			background-image: url("/images/slide4.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+		}
+
+		.custom-card {
+			border: 1px solid #ced4da;
+			box-shadow: black;
+			border-radius: 50px;
+			width: 300px;
+			margin: 0 auto;
+			margin-bottom: 10px;
+		}
+
+		h5 {
+			font-weight: bold;
+			font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+			color: black;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<div th:replace="fragments/customerSearchNavbar"></div>
+
+	<div class="container-fluid d-flex justify-content-center">
+		<div class="row">
+			<!-- Loop through objects and generate cards -->
+			<div th:each="v : ${vendors}">
+				<div class="col-md-4">
+					<div class="card custom-card">
+						<div class="card-body text-center">
+
+							<h4 style="font-weight: bold; color: black;"><span th:text="${v.shopName}"></span></h4>
+							<h6>Location: <span th:text="${v.loc}"></span></h6>
+							<a th:href="@{/shopItems/{id}(id=${v.id})}" class="btn btn-success btn-rounded">Shop
+								items</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+</body>
+
+</html>

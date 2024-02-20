@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<link>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup and Login Form</title>
+    
+    <link href="/css/mdb.min.css" rel="stylesheet">
+	<!-- Online links -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+    
+</head>
+
+<body>
+	<!--<div th:replace="@{fragments/welcomeNavbar}"></div>-->
+    <div class="main">
+        <div class="login">
+            <form action="ven_loginwel" method="post">
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="email" name="email" id="" placeholder="Email" required="">
+                <input type="password" name="pswd" placeholder="Password" id="" required="">
+                <button>Login</button>
+                <p id="p2">Don't have account? <a href="vendor">Create an Account</a></p>
+                <p id="p3"><a href="/forgetPassword">forget password?</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

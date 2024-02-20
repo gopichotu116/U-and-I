@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Items List</title>
+
+	<th:block th:insert="bootstrap.html"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+	
+
+	<style>
+		body {
+			background-image: url("/images/space1.jpg");
+		}
+
+		.table {
+			border-collapse: collapse;
+			border-radius: 30px;
+			overflow: hidden;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<div th:replace="fragments/custShopItemsSearchNavbar"></div>
+	<h1 style="text-align: center; font-weight: bold; color: white;">ITEMS LIST</h1>
+	<div class="container-fluid d-flex my-5 col-md-14 table-responsive rounded">
+		<!--overflow-x: auto;-->
+		<table
+			class="table rounded-table table-bordered  border-dark table-striped table-hover overflow-x:auto; table-sm">
+			<thead class="table-primary">
+				<tr>
+					<!--<th scope="col" class="edit">Id</th>-->
+					<th scope="col" class="edit">Name</th>
+					<th scope="col" class="edit">Price/1 q'ty</th>
+					<th scope="col" class="edit">Available q'ty</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="s :${shopItemsList}">
+					<td class="tdname" th:text="${s.name}"></td>
+					<td th:text="${s.price}"></td>
+					<td th:text="${s.quantity}"></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+
+</body>
+
+</html>

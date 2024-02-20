@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/css/mdb.min.css" rel="stylesheet">
+
+    <!-- Online links -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <title>Edit Item</title>
+    <style>
+        body {
+            background-image: url("/images/editItem.jpg");
+            background-repeat: no-repeat;
+            /* Prevent image from repeating */
+            background-size: cover;
+            /* Cover entire element */
+            background-position: center;
+        }
+
+        input {
+            font-family: Arial, sans-serif;
+            /* Choose a thick font-family */
+            font-size: 24px;
+            /* Adjust font size as needed */
+            color: #333;
+            /* Dark color */
+            font-weight: bold;
+            /* Ensure thick font */
+            height: 50px;
+            /* Match the height of the input elements */
+        }
+
+        h1 {
+            font-weight: bold;
+            color: whitesmoke;
+        }
+
+        .form-control {
+            font-size: large;
+            font-weight: bold;
+            margin-bottom: 15px; /* Reduce the bottom margin */
+        }
+        .form-label{
+            font-size: large;
+            margin-bottom: 5px; 
+            font-weight: bold;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div th:replace="@{fragments/vendornavbar}"></div>
+
+<div class="container my-2 p-3" style="">
+    <h1 class="text-center text-dark">Edit Item Here</h1>
+    <form class="col-md-4 offset-md-4" th:action="@{/saveItem}" method="post" th:object="${item}">
+
+        <input type="hidden" name="id" th:value="${item.id}" />
+        <div class="mb-1">
+            <label for="name" class="form-label">Name</label> 
+            <input type="text" class="form-control" name="name" th:value="${item.name}">
+        </div>
+
+        <div class="mb-1">
+            <label for="price" class="form-label">Price
+            </label> <input type="number" class="form-control" name="price" th:value="${item.price}">
+        </div>
+        
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quntity
+            </label> <input type="text" class="form-control" name="quantity" th:value="${item.quantity}">
+        </div>
+
+        <center><button type="submit" class="btn btn-primary">Submit</button></center>
+    </form>
+</div>
+
+<div th:replace="fragments/footer"></div>
+
+<script src="/js/mdb.umd.min.js"></script>
+<script src="/js/all.min.js"></script>
+
+</body>
+
+</html>

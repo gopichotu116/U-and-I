@@ -1,0 +1,95 @@
+<!-- Navbar -->
+<nav class="navbar d-flex navbar-expand-lg navbar-secondary sticky-top" style="background-color: #F5F5F5">
+	<!-- Container wrapper -->
+	<div class="container-fluid">
+		<!-- Toggle button -->
+		<button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+		</button>
+
+		<!-- Collapsible wrapper -->
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<!-- Navbar brand -->
+			<a class="navbar-brand mt-2 mt-lg-0">
+				<img class="image rounded" src="/images/shop2.jpg" height="80" width="100" alt="LM Logo"
+					loading="lazy" />
+			</a>
+			<!-- Left links -->
+			<!--Moved to right side-->
+			<ul class="navbar-nav me-auto mb-1 mb-lg-0">
+				<li class="nav-item">
+					<!--<a class="nav-link" aria-current="page" href="/">Home</a>-->
+					<button type="button" class="btn m-1 btn-lg btn-warning btn-rounded" data-mdb-ripple-init>
+						<a style="color: white;" aria-current="page" href="/vendor_home"><i
+								class="fas fa-house"></i>HOME</a></button>
+
+
+				</li>
+				<li class="nav-item">
+					<!--<a class="nav-link" aria-current="page" href="/">Home</a>-->
+					<button type="button" class="btn m-1 btn-lg btn-secondary btn-rounded" data-mdb-ripple-init>
+						<a style="color: black;" aria-current="page" href="venAboutUs">About Us</a></button>
+				</li>
+
+			</ul>
+			<!-- Left links -->
+		</div>
+		<!-- Collapsible wrapper -->
+		<!-- Right elements -->
+		<div class="d-flex align-items-center">
+
+			<form class="container d-flex input-group mt-0 w-auto" action="/searchItem" method="post">
+				<input style="height: 50px; width: 300px;" type="search"
+					class="form-control rounded bg-tertiary text-primary" name="value" placeholder="Search Item here"
+					aria-label="Search" aria-describedby="search-addon" />
+				<span class="input-group-text border-0 mt-2" id="search-addon">
+					<i class="fas fa-search"></i>
+				</span>
+			</form>
+			<ul class="navbar-nav me-auto mb-1 mb-lg-0">
+
+
+				<li class="nav-item">
+					<button type="button" class="btn btn-lg btn-info btn-rounded" data-mdb-ripple-init>
+						<a style="color: white;" href="/myList"><i class="fas fa-clipboard-list"></i>List of
+							Items</a></button>
+				</li>
+
+			</ul>
+
+			<button type="button" class="btn btn-lg btn-success btn-rounded" data-mdb-ripple-init>
+				<a style="color: white;" href="/addItem"><i class="fas fa-cart-plus"></i>Add item</a></button>
+			<!-- Avatar -->
+			<div class="dropdown">
+
+				<a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+					id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+
+					<!--<span th:text="${name}"></span>-->
+					<span style="color: black; font-size: large;" th:text="${name}"></span>
+					<button type="button" class="btn btn-dark btn-floating m-l-1" data-mdb-ripple-init>
+
+						<i class="fas fa-user fa-2x"></i>
+					</button>
+
+				</a>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+					<!--<li>
+						<a class="dropdown-item" href="#">My profile</a>
+					</li>-->
+					<li>
+						<a class="dropdown-item" href="/vendorProfile">Profile</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="/welcome">Logout</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<!-- Right elements -->
+	</div>
+	<!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

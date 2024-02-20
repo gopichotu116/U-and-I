@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>My Profile</title>
+
+	<script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+	<link href="/css/mdb.min.css" rel="stylesheet">
+
+	<!-- Online links -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+	<style>
+		body {
+			/* background-color: #FBFBFB;*/
+			/* Your custom background color */
+			background-image: url("/images/profile1.jpg");
+			background-repeat: no-repeat;
+			/* Prevent image from repeating */
+			background-size: cover;
+			/* Cover entire element */
+			background-position: center;
+			/* Center the image */
+			/* background-attachment: fixed; */
+			/* Fix the background image in place */
+		}
+		
+		.col-sm-4{
+			font-size: large; 
+			font-weight: bold;
+			font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		}
+		
+		.btn {
+			color: #00C853;
+		}
+	</style>
+
+
+</head>
+
+<body>
+
+	<div th:replace="@{fragments/vendornavbar}"></div>
+
+	<div class="container d-flex justify-content-center align-items-center" style="height: 87vh;">
+		<div class="card custom-card-bg" style="width: 30rem;">
+			<div class="card-body">
+				<div class="container d-flex justify-content-center align-items-center" style="height: 11vh;">
+					<i class="far fa-user fa-6x"></i>
+					<!--<img src="/images/shop4.jpg" height="100px" class="rounded-circle">-->
+				</div>
+
+			</div>
+
+			<ul class="list-group list-group-flush">
+				<th:block th:each="vp :${vendorProfile}">
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Id
+							</div>
+							<div class="col-sm-8" th:text="${vp.id}">
+								<!-- Display profile id -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Name
+							</div>
+							<div class="col-sm-8" th:text="${vp.name}">
+								<!-- Display profile name -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item" >
+						<div class="row">
+							<div class="col-sm-4">
+								Email
+							</div>
+							<div class="col-sm-8" th:text="${vp.email}">
+								<!-- Display profile email -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Password
+							</div>
+							<div class="col-sm-8" th:text="${vp.password}">
+								<!-- Display profile password -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Phone No
+							</div>
+							<div class="col-sm-8" th:text="${vp.phno}">
+								<!-- Display profile department -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								ShopName
+							</div>
+							<div class="col-sm-8" th:text="${vp.shopName}">
+								<!-- Display profile department -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Location
+							</div>
+							<div class="col-sm-8" th:text="${vp.loc}">
+								<!-- Display profile department -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-sm-4">
+								Google Maps
+							</div>
+							<div class="col-sm-8" th:text="${vp.maps}">
+								<!-- Display profile department -->
+							</div>
+						</div>
+					</li>
+					<li class="list-group-item">
+						<div class="container mb-3 d-flex justify-content-center align-items-center">
+							<div class="col-sm-4">
+								<button type="button" class="btn"><a style="color: green"
+										th:href="@{/editVendorProfile/{id}(id=${vp.id})}">Edit profile</a>
+
+								</button>
+
+							</div>
+
+						</div>
+					</li>
+				</th:block>
+			</ul>
+
+		</div>
+	</div>
+
+	<div th:replace="@{fragments/footer}"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+
+</body>
+
+</html>

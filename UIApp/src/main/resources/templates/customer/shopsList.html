@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Items List</title>
+
+	<th:block th:insert="bootstrap.html"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+
+	<style>
+		body {
+			background-image: url("/images/footer4.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+		}
+
+		.table {
+			border-radius: 30px;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<div th:replace="fragments/customerSearchNavbar"></div>
+	<h1 style="text-align: center; font-weight: bold; color: black;">SHOPS LIST</h1>
+	<div class="container my-5 col-md-14 table-responsive rounded">
+		<!--overflow-x: auto;-->
+		<table class="table table-bordered border-dark table-striped table-hover overflow-x:auto; table-sm">
+			<thead class="table-warning">
+				<tr>
+					<th scope="col" class="edit">Name</th>
+					<th scope="col" class="edit">Location </th>
+					<th scope="col" class="edit">Click for Items</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="v :${vendors}">
+					<td class="tdname" th:text="${v.shopName}"></td>
+					<td th:text="${v.loc}"></td>
+					<td><a th:href="@{/shopItems/{id}(id=${v.id})}">Shop Items</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Items List</title>
+
+	<script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+	<link href="/css/mdb.min.css" rel="stylesheet">
+
+	<!-- Online links -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
+	
+	<style>
+		body{
+			background-image: url("/images/space1.jpg");
+		}
+		.table{
+			border-collapse: collapse;
+            border-radius: 30px;
+            overflow: hidden;
+		}
+	</style>
+	
+</head>
+
+<body>
+
+	<div th:replace="@{fragments/searchNavbar}"></div>
+	<h1 style="text-align: center; font-weight: bold; color: white;">ITMES LIST</h1>
+	<div class="container-fluid d-flex my-5 col-md-14 table-responsive rounded">
+		<!--overflow-x: auto;-->
+		<table class="table rounded-table table-bordered  border-dark table-striped table-hover overflow-x:auto; table-sm">
+			<thead class="table-primary">
+				<tr>
+					<!--<th scope="col" class="edit">Id</th>-->
+					<th scope="col" class="edit">Name</th>
+					<th scope="col" class="edit">Price</th>
+					<th scope="col" class="edit">Quantity</th>
+					<th scope="col" class="edit">Edit</th>
+					<th scope="col" class="edit">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="i :${item}">
+					<!--<td th:text="${i.id}"></td>-->
+					<td class="tdname" th:text="${i.name}"></td>
+					<td th:text="${i.price}"></td>
+					<td th:text="${i.quantity}"></td>
+					<!--<td th:text="${money}"></td>-->
+					<td>
+						<a style="color:cornflowerblue" th:href="@{/editList/{id}(id=${i.id})}"><i
+								class="fa-solid fa-pen-to-square ms-4"></i></a>
+					</td>
+					<td><a style="color:red" th:href="@{/deleteItem/{id}(id=${i.id})}"><i
+								class="fa-solid fa-trash"></i></a></td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+
+</body>
+
+</html>

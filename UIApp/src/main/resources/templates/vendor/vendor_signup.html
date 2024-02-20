@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<link>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup and Login Form</title>
+
+<link href="/css/mdb.min.css" rel="stylesheet">
+
+<!--Online links -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/signup.css}">
+<style>
+	
+</style>
+</head>
+
+<body>
+	<!--<div th:replace="fragments/welcomeNavbar"></div>-->
+	<div class="main">
+		<div class="signup">
+			<form action="ven_signupwel" method="post">
+				<label>Sign up</label>
+				<input type="text" name="name" placeholder="Username" required="">
+				<input type="email" name="email" id="" placeholder="Email" required="">
+				<input type="password" name="pswd" placeholder="Password" id="" required="">
+				<input type="text" name="num" placeholder="(+91)MobileNo" id="" required>
+				<input type="text" name="shopName" placeholder="Shop Name" id="" required>
+				<input type="text" name="loc" placeholder="Shop Location" id="" required>
+				<input type="url" name="maps" placeholder="Google maps(provide short URL)" id="" required>
+				<button type="submit">Sign up</button>
+				<p id="p1">Already have an account <a href="vendor_login">Login</a></p>
+			</form>
+		</div>
+</body>
+
+</html>

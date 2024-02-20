@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<link>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+
+<link href="/css/mdb.min.css" rel="stylesheet">
+
+<th:block th:insert="bootstrap.html"></th:block>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+
+</head>
+
+<body>
+	<div th:replace="fragments/customerNavbar"></div>
+	<div th:replace="fragments/slides"></div>
+	<h1 class="text-center" style="color: black; align-items: center; font-weight: bolder; font-family: 'Courier New', Courier, monospace;">
+		YOU AND I</h1>
+
+	<div class="container justify-content align-items-center text-center" style="font-weight: bold;">
+		<p>
+			The "UI" project is a web application designed to facilitate interactions between local shops and customers
+			within a given area. The platform offers a seamless registration process for shop owners, enabling them to
+			easily create an online presence for their businesses. Once registered, shop owners gain access to a
+			personalized dashboard where they can manage their store's inventory efficiently.
+		</p>
+		<p>
+			For customers, the UI project provides a user-friendly interface for browsing and searching items offered by
+			local shops. Customers can easily search for specific items or browse through categories to find products of
+			interest. The platform utilizes location-based services to display items available in nearby shops, allowing
+			customers to conveniently find the items they need without having to travel far.
+			Through the dashboard, shop owners can view a comprehensive list of items available in their store. They
+			have the ability to add, update, or remove items as needed, ensuring that their inventory remains accurate
+			and up-to-date. This streamlined process empowers shop owners to effectively showcase their products to
+			potential customers, enhancing their online visibility and accessibility.
+		</p>
+		<p>
+			Additionally, the UI project offers features such as user reviews and ratings, enabling customers to make
+			informed decisions based on the experiences of others. This fosters a sense of trust and transparency within
+			the community, encouraging ongoing engagement and collaboration between shops and customers.
+		</p>
+		<p>
+			Overall, the UI project serves as a valuable resource for both local shops and customers, providing a
+			convenient and efficient platform for buying and selling goods within the local community. By facilitating
+			seamless interactions and enhancing accessibility, the project aims to foster economic growth and strengthen
+			community ties.
+		</p>
+	</div>
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+</body>
+
+</html>

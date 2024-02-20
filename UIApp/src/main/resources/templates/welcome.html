@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<link>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome page</title>
+
+<link href="/css/mdb.min.css" rel="stylesheet">
+<!--Online links-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+<style>
+	body{
+		background-image: url("/images/shop3.jpg");
+		background-repeat: inherit;
+	}
+</style>
+
+</head>
+
+<body>
+	<!--<div th:replace="fragments/welcomeNavbar"></div>-->
+	<div class="mt-5 d-flex justify-content-center ">
+		<a href="customer" type="button" class="btn btn-primary btn-lg rounded-pill mr-3">Customer</a>
+		<br><a href="vendor" type="button" class="btn btn-success btn-lg rounded-pill">Vendor</a>
+	</div>
+</body>
+
+</html>
