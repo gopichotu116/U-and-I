@@ -8,9 +8,6 @@ public class ItemsController {
 	
 	/*----------------------------- Add Item ---------------------------------- */
 	
-	@GetMapping("/addItem")
-	public String addItems() {
-		return "items/addItem";
-	}
+	
 	
 }

@@ -1,6 +1,7 @@
 package com.org.ui.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,8 @@ public class VendorService {
 	@Autowired
 	private VendorRepository venRepo;
 	
-
-	public void saveVendor(String name, String email, String password, String phoneNum, String shopName, String loc, String maps) {
-
-		Vendor vendor = new Vendor(name, email, password, phoneNum, shopName, loc, maps);
+	public void save(Vendor vendor) {
 		venRepo.save(vendor);
-
 	}
 
 
@@ -47,5 +44,17 @@ public class VendorService {
 	public List<Vendor> getVendorByLoc(String loc) {
 		return venRepo.findVendorByLoc(loc);
 	}
+
+
+	public byte[] getProfileImage(Integer id) {
+		Optional<Vendor> optionalVendor = venRepo.findById(id);
+		if(optionalVendor.isPresent()) {
+			Vendor vendor = optionalVendor.get();
+			return vendor.getProfileImage();
+		}
+		return null;
+	}
+
+
 
 }

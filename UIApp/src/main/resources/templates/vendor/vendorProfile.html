@@ -7,51 +7,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>My Profile</title>
 
-	<script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
-	<link href="/css/mdb.min.css" rel="stylesheet">
+	<th:block th:insert="bootstrap"></th:block>
 
-	<!-- Online links -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-
-	<style>
-		body {
-			/* background-color: #FBFBFB;*/
-			/* Your custom background color */
-			background-image: url("/images/profile1.jpg");
-			background-repeat: no-repeat;
-			/* Prevent image from repeating */
-			background-size: cover;
-			/* Cover entire element */
-			background-position: center;
-			/* Center the image */
-			/* background-attachment: fixed; */
-			/* Fix the background image in place */
-		}
-		
-		.col-sm-4{
-			font-size: large; 
-			font-weight: bold;
-			font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-		}
-		
-		.btn {
-			color: #00C853;
-		}
-	</style>
-
-
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">
+	
 </head>
 
 <body>
 
-	<div th:replace="@{fragments/vendornavbar}"></div>
+	<div th:replace="fragments/vendornavbar"></div>
 
-	<div class="container d-flex justify-content-center align-items-center" style="height: 87vh;">
+	<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
 		<div class="card custom-card-bg" style="width: 30rem;">
 			<div class="card-body">
-				<div class="container d-flex justify-content-center align-items-center" style="height: 11vh;">
-					<i class="far fa-user fa-6x"></i>
-					<!--<img src="/images/shop4.jpg" height="100px" class="rounded-circle">-->
+				<div class="container d-flex justify-content-center align-items-center">
+					<img style="max-width: 100px; max-height: 100px;"
+						th:src="'data:image/jpeg;base64,' + ${venProfileImage}" class="profile-image rounded-circle"
+						alt="profile">
 				</div>
 
 			</div>
@@ -78,7 +51,7 @@
 							</div>
 						</div>
 					</li>
-					<li class="list-group-item" >
+					<li class="list-group-item">
 						<div class="row">
 							<div class="col-sm-4">
 								Email
@@ -156,7 +129,7 @@
 		</div>
 	</div>
 
-	<div th:replace="@{fragments/footer}"></div>
+	<div th:replace="fragments/footer"></div>
 
 	<script src="/js/mdb.umd.min.js"></script>
 	<script src="/js/all.min.js"></script>

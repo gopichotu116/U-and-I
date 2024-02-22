@@ -6,11 +6,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="/css/mdb.min.css" rel="stylesheet">
-
-	<!-- Online links -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-
+	<th:block th:insert="bootstrap"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
 	<title>Add item</title>
 
 	<style>
@@ -20,13 +17,9 @@
 
 		input {
 			font-family: Arial, sans-serif;
-			/* Choose a thick font-family */
 			font-size: 24px;
-			/* Adjust font size as needed */
 			color: #333;
-			/* Dark color */
 			font-weight: bold;
-			/* Ensure thick font */
 			height: 50px;
 			margin-top: 35px;
 		}
@@ -45,22 +38,27 @@
 
 <body>
 
-	<div th:replace="@{fragments/vendornavbar}"></div>
+	<div th:replace="fragments/vendornavbar"></div>
 
 	<div class="container my-5 p-5">
 		<!--style="border:1px solid black;"-->
+		
 		<h1 class="text-center">ADD YOUR ITEM</h1>
+		
+		<div th:if="${not #strings.isEmpty(addSuccess)}">
+			<h4 class="text-center text-warning fs-10 fw-bold " th:text="${addSuccess}"></h4>
+		</div>
+		
 		<form class="col-md-4 offset-md-4" th:action="@{/saveItem}" method="post">
 			<div class="mb-3">
 				 <input type="text" class="form-control" name="name" placeholder="Item Name" required>
 			</div>
 
 			<div class="mb-3">
-				 <input type="number" class="form-control" name="price" placeholder="Price" required>
+				 <input type="number" class="form-control" name="price" placeholder="Price/1 q'ty" required>
 			</div>
 			<div class="mb-3">
-				<!--<label for="price" class="form-label">Quantity </label>-->
-				 <input type="text" class="form-control" name="quantity" placeholder="Quantity" required>
+				 <input type="text" class="form-control" name="quantity" placeholder="Avl Q'ty" required>
 			</div>
 
 			<input type="hidden" name="v_id" th:value="${vendor}" />
@@ -70,7 +68,7 @@
 	</div>
 
 
-	<div th:replace="@{fragments/footer}"></div>
+	<div th:replace="fragments/footer"></div>
 
 	<script src="/js/mdb.umd.min.js"></script>
 	<script src="/js/all.min.js"></script>

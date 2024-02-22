@@ -2,19 +2,30 @@
      	background-image: url("/images/shop4.jpg");
 
      }
-
-     .main {
-
+     .parent{
+		 
      	width: 350px;
      	height: 600px;
      	/*background: rgb(112, 128, 224);*/
      	background: #eee;
      	/*overflow: hidden;*/
-     	border-radius: 10px;
+     	border-radius: 20px;
      	box-shadow: 5px 30px 50px black;
      	position: relative;
-     	top: 0px;
-     	left: 470px;
+     	top: 10px;
+	 }
+
+     .main{
+
+     	width: 350px;
+     	height: 760px;
+     	/*background: rgb(112, 128, 224);*/
+     	background: #eee;
+     	/*overflow: hidden;*/
+     	border-radius: 20px;
+     	box-shadow: 5px 30px 50px black;
+     	position: relative;
+     	top: 10px;
      }
 
      .signup {
@@ -28,7 +39,9 @@
      	font-size: 35px;
      	justify-content: center;
      	display: flex;
-     	margin: 60px;
+     	/*margin: 60px;*/
+     	position: relative;
+     	left: 5px;
      	font-weight: bold;
      	cursor: pointer;
      	transition: .5s ease-in-out;
@@ -36,10 +49,12 @@
      }
 
      input {
-     	width: 80%;
-     	height: 40px;
+     	width: 92%;
+     	height: 45px;
      	background: white;
-     	justify-content: center;
+     	/*justify-content: center;*/
+     	position: relative;
+     	/*top: 5px;*/
      	display: flex;
      	margin: 18px auto;
      	padding: 10px;
@@ -51,6 +66,8 @@
      button {
      	width: 60%;
      	height: 40px;
+     	position: relative;
+     	top: 10px;
      	margin: 2px auto;
      	justify-content: center;
      	display: block;
@@ -58,7 +75,6 @@
      	background: rgb(43, 83, 194);
      	font-size: 20px;
      	font-weight: bold;
-     	margin-top: 18px;
      	outline: none;
      	border: none;
      	border-radius: 10px;
@@ -68,7 +84,8 @@
      }
 
      button:hover {
-     	background: rgb(20, 57, 105);
+     	color: black;
+     	background: lightgreen;
      }
 
 
@@ -80,23 +97,26 @@
      	font-size: x-large;
      }
 
-     #p2 {
-     	/* margin-top: 50px;
-    margin-left: 30px; */
+     .pswd {
+     	color: black;
+     	text-align: left;
+     	font-size: medium;
+     	font-weight: bold;
      	position: relative;
-     	top: 30px;
-     	left: 31px;
+     	top: -5px;
+     	left: -25px;
+     	height: 0px;
      }
 
      #p1 {
-     	position: relative;
-     	top: 20px;
-     	left: 65px;
-     	color: darkred;
+     	text-align: center;
+     	color: green;
+     	font-weight: bold;
      }
-
-     #p3 {
-     	position: relative;
-     	top: 30px;
-     	left: 30px;
-     }
+     #p2{
+		 position: relative;
+		 top: 20px;
+		 text-align: center;
+     	color: green;
+     	font-weight: bold;
+	 }

@@ -9,12 +9,14 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.org.ui.entity.Customer;
 import com.org.ui.entity.Items;
@@ -24,6 +26,7 @@ import com.org.ui.service.EmailService;
 import com.org.ui.service.ItemService;
 import com.org.ui.service.VendorService;
 
+@ControllerAdvice
 @Controller
 public class CustomerController {
 
@@ -37,6 +40,8 @@ public class CustomerController {
 	private ItemService itemService;
 
 	private String userName;
+	
+	private String name;
 
 	byte[] profileImage;
 
@@ -45,46 +50,46 @@ public class CustomerController {
 	public CustomerController(EmailService emailService) {
 		this.emailService = emailService;
 	}
+	
+	@ModelAttribute("name")
+    public String addNameAttribute() {
+        String userName = name;
+        return userName;
+    }
+	
+	@ModelAttribute("profileImage")
+	public String addImageAttribute() {
+		return profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "";
+	}
 
 	/*------------------------------ SignUp ------------------------------- */
 
 	@GetMapping("/customer")
 	public String customer(Customer customer) {
-		return "customer/customer_signup";
-	}
-
-	@PostMapping("/signup")
-	public String signup(@RequestParam("file") MultipartFile file, Customer customer) throws IOException {
-		if (!file.isEmpty()) {
-			customer.setProfileImage(file.getBytes());
-		}
-		if (passValidation(customer.getPassword())) {
-			custService.save(customer);
-			emailService.sendSignupConfirmationEmail(customer.getEmail(), customer.getName());
-			return "customer/cust_signupwel";
-		}
-		return "customer/cust_signupfail";
+		return "customer/customerSignup";
 	}
 
 	@PostMapping("/cust_signupwel")
-	public String custSignup(@RequestParam("file") MultipartFile file, Customer customer) throws IOException {
+	public String custSignup(@RequestParam("file") MultipartFile file, Customer customer, Model model) throws IOException {
 		if (!file.isEmpty()) {
 			customer.setProfileImage(file.getBytes());
 		}
 		if (passValidation(customer.getPassword())) {
 			custService.save(customer);
 			emailService.sendSignupConfirmationEmail(customer.getEmail(), customer.getName());
-			return "customer/cust_signupwel";
+			model.addAttribute("loginSuccess", "Your account is created");
+			return "customer/customerLogin";
 		}
-		return "customer/cust_signupfail";
+		return "redirect:/passwordRequirements";
 
 	}
-
+	
+	
 	/*----------------------------- Login ---------------------------------- */
 
 	@GetMapping("/customer_login")
 	public String cus_login() {
-		return "customer/customer_login";
+		return "customer/customerLogin";
 	}
 
 	@PostMapping("/cust_loginwel")
@@ -96,27 +101,34 @@ public class CustomerController {
 			model.addAttribute("profileImage",
 					profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
 			userName = customer.getEmail();
-			model.addAttribute("name", userName);
+			name=customer.getName();
+			model.addAttribute("name", name);
+			
+			model.addAttribute("loginSuccess", "Your account is created");
 			model.addAttribute("customer", customer);
-			return "customer/cust_home";
+			return "customer/customerHome";
 		}
-		return "/customer/cust_loginfail";
+		else {
+			
+			model.addAttribute("errorMsg", "Incorrect password/email");
+			return "/customer/customerLogin";
+			
+		}
+	}
+	
+	@GetMapping("/passwordRequirements")
+	public String pswdReq() {
+		return "/fragments/passwordRequirements";
 	}
 
 	/*----------------------------- Customer Home ---------------------------------- */
 	@GetMapping("/cust_home")
 	public String customerHome(Model model) {
-		model.addAttribute("profileImage",
-				profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-		model.addAttribute("name", userName);
-		return "/customer/cust_home";
+		return "/customer/customerHome";
 	}
 
 	@GetMapping("/custAboutUs")
 	public String aboutUs(Model model) {
-		model.addAttribute("profileImage",
-				profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-		model.addAttribute("name", userName);
 		return "customer/aboutUs";
 	}
 
@@ -127,10 +139,6 @@ public class CustomerController {
 		List<Vendor> vendorsList = venService.getVendorByLoc(loc);
 		if (!vendorsList.isEmpty()) {
 			model.addAttribute("vendors", vendorsList);
-			model.addAttribute("profileImage",
-					profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-			model.addAttribute("name", userName);
-
 			return "customer/shopsList2";
 		}
 
@@ -139,27 +147,28 @@ public class CustomerController {
 
 	/*----------------------------- Search Items ---------------------------------- */
 	
+	int vendorId;
+	
 	@GetMapping("/shopItems/{id}")
 	public String getShopItems(@PathVariable("id") int id, Model model) {
+		vendorId=id;
 		List<Items> itemsList = itemService.getItemsByVendorShopName(id);
-		System.out.println(itemsList);
+		Vendor vendor = venService.getVendorById(id);
+		model.addAttribute("vendor", vendor);
+		model.addAttribute("url", vendor.getMaps());
 		model.addAttribute("shopItemsList", itemsList);
-		model.addAttribute("profileImage",
-				profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-		model.addAttribute("name", userName);
 		return "customer/shopItemsList";
 	}
-
 	@PostMapping("/searchItemInShop")
-	public String searchItemInShop(@RequestParam("value") String value, Model model) {
+	public ModelAndView searchItemInShop(@RequestParam("value") String value, Model model) {
 		List<Items> itemsList = itemService.getListByItem(value);
 //		itemService.getItmesListByVendorShopName(value);
-		model.addAttribute("items", itemsList);
-		
-		model.addAttribute("profileImage",
-				profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-		model.addAttribute("name", userName);
-		return "customer/searchShopItems";
+		Vendor vendor = venService.getVendorById(vendorId);
+		model.addAttribute("vendor", vendor);
+		List<Items> items = itemService.findItemByVendorIdAndValue(vendorId, value);
+		System.out.println(items);
+		return new ModelAndView("/customer/searchShopItems", "items", items);
+//		return "customer/searchShopItems";
 	}
 
 	/*----------------------------- Customer Search Item ---------------------------------- */
@@ -168,9 +177,6 @@ public class CustomerController {
 	public String customerSearchItem(@RequestParam("item") String item, Model model) {
 		List<Items> itemsList = itemService.getListByItem(item);
 		model.addAttribute("items", itemsList);
-		model.addAttribute("profileImage",
-				profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-		model.addAttribute("name", userName);
 		return "customer/searchItem";
 	}
 
@@ -184,7 +190,6 @@ public class CustomerController {
 		profileImage = custService.getProfileImage(customer.getId());
 		model.addAttribute("profileImage",
 				profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-		model.addAttribute("name", userName);
 		return "customer/customerProfile";
 	}
 
@@ -192,10 +197,8 @@ public class CustomerController {
 	public String editCustomer(@PathVariable("id") int id, Model model) {
 		Customer customer = custService.getCustomerById(id);
 		model.addAttribute("custProfile", customer);
-		model.addAttribute("profileImage",
-				profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-		model.addAttribute("name", userName);
-		return "customer/custEditProfile";
+		
+		return "customer/customerEditProfile";
 	}
 
 	@PostMapping("/saveCustomer")
@@ -204,28 +207,27 @@ public class CustomerController {
 		model.addAttribute("custProfile", customer);
 		if (passValidation(customer.getPassword())) {
 			customer.setProfileImage(file.getBytes());
+			
 			profileImage = custService.getProfileImage(customer.getId());
 			model.addAttribute("profileImage",
 					profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-			model.addAttribute("name", userName);
 			custService.updateVendor(customer);
+			
 			return "redirect:/custProfile";
 		}
-		return "customer/invalidPassword";
+		return "redirect:/passwordRequirements";
 	}
 
 	@PostMapping("/custChangePass")
 	public String changePassword(@RequestParam("email") String email, Model model) {
 		Customer customer = custService.getCustomerByEmail(email);
-		if (customer == null)
-			return "customer/invalidEmail";
+		if (customer == null) {
+			model.addAttribute("invalidEmail", "Invalid email address");
+			return "customer/forgetPassword";
+		}
 		else {
-			model.addAttribute("profileImage",
-					profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
-			model.addAttribute("name", userName);
 			model.addAttribute("password", customer.getPassword());
-
-			return "customer/showPassword";
+			return "customer/forgetPassword";
 		}
 	}
 

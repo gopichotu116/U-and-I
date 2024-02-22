@@ -1,5 +1,7 @@
 package com.org.ui.controller;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.org.ui.entity.Items;
@@ -31,6 +34,21 @@ public class VendorController {
 
 	private String userName;
 
+	byte[] venProfileImage;
+
+	String name;
+
+	@ModelAttribute("vendorName")
+	public String addNameAttribute() {
+		String userName = name;
+		return userName;
+	}
+
+	@ModelAttribute("venProfileImage")
+	public String addImageAttribute() {
+		return venProfileImage != null ? Base64.getEncoder().encodeToString(venProfileImage) : "";
+	}
+
 	/*----------------------------- Vendor Home ---------------------------------- */
 
 	@GetMapping("/vendor_home")
@@ -40,7 +58,7 @@ public class VendorController {
 		model.addAttribute("map", maps);
 		return "vendor/vendor_home";
 	}
-	
+
 	@GetMapping("/venAboutUs")
 	public String aboutUs() {
 		return "vendor/aboutUs";
@@ -49,21 +67,23 @@ public class VendorController {
 	/*----------------------------- SignUp ---------------------------------- */
 
 	@GetMapping("/vendor")
-	public String vendor() {
+	public String vendor(Vendor vendor) {
 		return "vendor/vendor_signup";
 	}
 
 	@PostMapping("/ven_signupwel")
-	public String ven_signup(@RequestParam("name") String name, @RequestParam("email") String email,
-			@RequestParam("pswd") String password, @RequestParam("num") String phoneNum,
-			@RequestParam("shopName") String shopName, @RequestParam("loc") String loc,
-			@RequestParam("maps") String maps) {
+	public String ven_signup(@RequestParam("file") MultipartFile file, Vendor vendor, Model model) throws IOException {
 
-		if (passValidation(password)) {
-			venService.saveVendor(name, email, password, phoneNum, shopName, loc, maps);
-			return "vendor/ven_signupwel";
+		if (!file.isEmpty()) {
+			vendor.setProfileImage(file.getBytes());
 		}
-		return "vendor/ven_signupfail";
+
+		if (passValidation(vendor.getPassword())) {
+			venService.save(vendor);
+			model.addAttribute("loginSuccess", "Your account is created");
+			return "vendor/vendor_login";
+		}
+		return "fragments/passwordRequirements";
 
 	}
 
@@ -79,31 +99,44 @@ public class VendorController {
 
 		Vendor vendor = venService.checkUserandPass(email, password);
 		if (vendor != null) {
+			venProfileImage = venService.getProfileImage(vendor.getId());
 			String maps = vendor.getMaps();
 			model.addAttribute("map", maps);
 			model.addAttribute("vendor", vendor);
 			userName = vendor.getEmail();
+			name = vendor.getName();
+			model.addAttribute("userName", name);
+			model.addAttribute("loginSuccess", "Your account is created");
+			model.addAttribute("vendor", vendor);
 			return "vendor/vendor_home";
+		} else {
+			model.addAttribute("errorMsg", "Incorrect password/email");
+			return "/vendor/vendor_login";
 		}
-		return "vendor/ven_loginfail";
 	}
 
 	/*----------------------------- Items ---------------------------------- */
-	
+
+	@GetMapping("/addItem")
+	public String addItems(Model model) {
+		return "items/addItem";
+	}
+
 	@PostMapping("/saveItem")
-	public String saveItem(@RequestParam("name") String name, @RequestParam("price") double price,
-			@RequestParam("quantity") String quantity, Model model) {
+	public String updateItem(@ModelAttribute Items item, Model model) {
 		Vendor vendor = venService.getVendorByEmail(userName);
-		System.out.println(vendor);
-		itemService.save(name, price, quantity, vendor);
+		item.setVendor(vendor);
+		itemService.save(item);
+//		model.addAttribute("addSuccess", "Item added successfully");
+//		model.addAttribute("editSuccess", "Item edited successfully");
 		return "items/successAddItem";
 	}
-	
+
 	@PostMapping("/searchItem")
 	public ModelAndView searchItemByVendorId(@RequestParam("value") String value, Model model) {
 		Vendor vendor = venService.getVendorByEmail(userName);
 		List<Items> items = itemService.findItemByVendorIdAndValue(vendor.getId(), value);
-		System.out.println(items);
+		model.addAttribute("shopName", vendor.getShopName());
 		return new ModelAndView("/items/itemList", "item", items);
 	}
 
@@ -111,9 +144,10 @@ public class VendorController {
 	public ModelAndView getMyList(Model model) {
 		Vendor vendor = venService.getVendorByEmail(userName);
 		List<Items> list = itemService.getItemsByVendorId(vendor.getId());
+		model.addAttribute("shopName", vendor.getShopName());
 		return new ModelAndView("/items/itemList", "item", list);
 	}
-	
+
 	@GetMapping("/availableList")
 	public ModelAndView getAllItems() {
 		List<Items> items = itemService.getAllItems();
@@ -126,6 +160,7 @@ public class VendorController {
 	public String editList(@PathVariable("id") int id, Model model) {
 		Items i = itemService.getItemById(id);
 		model.addAttribute("item", i);
+		System.out.println(i);
 		return "items/editItem";
 
 	}
@@ -139,11 +174,14 @@ public class VendorController {
 	}
 
 	/*----------------------------- Vendor Profile ---------------------------------- */
-	
+
 	@GetMapping("/vendorProfile")
 	public String myProfile(Model model) {
 		Vendor vendor = venService.getVendorByEmail(userName);
 		model.addAttribute("vendorProfile", vendor);
+		venProfileImage = venService.getProfileImage(vendor.getId());
+		model.addAttribute("venProfileImage",
+				venProfileImage != null ? Base64.getEncoder().encodeToString(venProfileImage) : "");
 		return "/vendor/vendorProfile";
 	}
 
@@ -153,25 +191,31 @@ public class VendorController {
 		model.addAttribute("venProfile", vendor);
 		return "/vendor/ven_editProfile";
 	}
-	
+
 	@PostMapping("/saveVendor")
-	public String updateVendor(@ModelAttribute Vendor vendor, Model model) {
+	public String updateVendor(@ModelAttribute Vendor vendor, @RequestParam("file") MultipartFile file, Model model)
+			throws IOException {
 		model.addAttribute("venProfile", vendor);
 		if (passValidation(vendor.getPassword())) {
+			vendor.setProfileImage(file.getBytes());
 			venService.updateVendor(vendor);
+			venProfileImage = venService.getProfileImage(vendor.getId());
+			model.addAttribute("venProfileImage",
+					venProfileImage != null ? Base64.getEncoder().encodeToString(venProfileImage) : "");
 			return "redirect:/vendorProfile";
 		}
-		return "vendor/invalidPassword";
+		return "fragments/passwordRequirements";
 	}
 
 	@PostMapping("/venChangePass")
 	public String changePassword(@RequestParam("email") String email, Model model) {
 		Vendor vendor = venService.getVendorByEmail(email);
-		if (vendor == null)
-			return "vendor/invalidEmail";
-		else {
+		if (vendor == null) {
+			model.addAttribute("invalidEmail", "Invalid email address");
+			return "vendor/forgetPassword";
+		} else {
 			model.addAttribute("password", vendor.getPassword());
-			return "vendor/showPassword";
+			return "vendor/forgetPassword";
 		}
 	}
 
@@ -183,7 +227,7 @@ public class VendorController {
 	}
 
 	/*----------------------------- Password Validation ---------------------------------- */
-	
+
 	public boolean passValidation(String pass) {
 		String regexp = "(?=.*[A-Z])(?=.*[!@#$%^&*()])(?=.*[0-9]).{5,16}";
 		Matcher m = Pattern.compile(regexp).matcher(pass);

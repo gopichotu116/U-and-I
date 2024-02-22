@@ -27,8 +27,14 @@
 
 				<li class="nav-item">
 					<button type="button" class="btn m-1 btn-lg btn-secondary btn-rounded" data-mdb-ripple-init>
+						<a style="color: black;" aria-current="page" href="custAboutUs">My Cart</a></button>
+				</li>
+
+				<li class="nav-item">
+					<button type="button" class="btn m-1 btn-lg btn-secondary btn-rounded" data-mdb-ripple-init>
 						<a style="color: black;" aria-current="page" href="custAboutUs">About Us</a></button>
 				</li>
+
 
 			</ul>
 			<!-- Left links -->
@@ -46,11 +52,20 @@
 		<!-- Avatar -->
 		<div class="dropdown">
 
+
 			<a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
 				id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+
+
 				<div class="profile-image-container">
-					<img th:src="'data:image/jpeg;base64,' + ${profileImage}" class="profile-image" alt="Profile Image">
+					<!--<img th:src="'data:image/jpeg;base64,' + ${profileImage}" class="profile-image" alt="Profile Image">-->
+					<img th:src="'data:image/jpeg;base64,' + ${profileImage}" class="profile-image" alt="">
+					<i class="fa fa-user fa-2x" aria-hidden="true"></i>
+					<!-- Example of using a user icon as alternate text -->
+
 				</div>
+
+				<span style="font-size: large; font-weight: bold; color: black; height: 30px;" th:text="${name}"></span>
 			</a>
 
 			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">

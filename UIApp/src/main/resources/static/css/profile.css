@@ -1,0 +1,16 @@
+body {
+	background-image: url("/images/profile1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.col-sm-4 {
+	font-size: large;
+	font-weight: bold;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.btn {
+	color: #00C853;
+}

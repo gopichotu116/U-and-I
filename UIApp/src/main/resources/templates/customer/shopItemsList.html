@@ -5,9 +5,9 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Items List</title>
+	<title>Shop Items List</title>
 
-	<th:block th:insert="bootstrap.html"></th:block>
+	<th:block th:insert="bootstrap"></th:block>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
 	
@@ -30,7 +30,7 @@
 <body>
 
 	<div th:replace="fragments/custShopItemsSearchNavbar"></div>
-	<h1 style="text-align: center; font-weight: bold; color: white;">ITEMS LIST</h1>
+	<h1 th:text="${vendor.shopName}" style="text-align: center; font-weight: bold; color: white;"></h1>
 	<div class="container-fluid d-flex my-5 col-md-14 table-responsive rounded">
 		<!--overflow-x: auto;-->
 		<table
@@ -53,7 +53,9 @@
 			</tbody>
 		</table>
 	</div>
-
+	
+	<iframe th:src="${vendor.maps}" class="container-fluid d-flex h-100" frameborder="0" style="border:0;"></iframe>
+	<br>
 	<div th:replace="fragments/footer"></div>
 
 	<script src="/js/mdb.umd.min.js"></script>

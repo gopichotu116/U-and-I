@@ -54,5 +54,9 @@ public class ItemService {
 		return itemRepo.finItemsByVendorLoc(loc);
 	}
 
+	public void save(Items item) {
+		itemRepo.save(item);
+	}
+
 
 }

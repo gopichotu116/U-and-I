@@ -20,14 +20,26 @@
 			<ul class="navbar-nav me-auto mb-1 mb-lg-0">
 				<li class="nav-item">
 					<!--<a class="nav-link" aria-current="page" href="/">Home</a>-->
-					<button type="button" class="btn m-1 btn-lg btn-warning btn-rounded" data-mdb-ripple-init>
+					<button type="button" class="btn btn-lg m-1 btn-warning btn-rounded" data-mdb-ripple-init>
 						<a style="color: white;" aria-current="page" href="/vendor_home"><i
 								class="fas fa-house"></i>HOME</a></button>
 				</li>
 
+				<ul class="navbar-nav me-auto mb-1 mb-lg-0">
+
+					<li class="nav-item">
+						<button type="button" class="btn btn-lg m-1 btn-info btn-rounded" data-mdb-ripple-init>
+							<a style="color: white;" href="/myList"><i class="fas fa-clipboard-list"></i>
+								List of Items</a></button>
+					</li>
+
+				</ul>
+
+				<button type="button" class="btn btn-lg m-1 btn-success btn-rounded" data-mdb-ripple-init>
+					<a style="color: white;" href="/addItem"><i class="fas fa-cart-plus"></i>Add item</a></button>
+
 				<li class="nav-item">
-					<!--<a class="nav-link" aria-current="page" href="/">Home</a>-->
-					<button type="button" class="btn m-1 btn-lg btn-secondary btn-rounded" data-mdb-ripple-init>
+					<button type="button" class="btn btn-lg m-1 btn-secondary btn-rounded" data-mdb-ripple-init>
 						<a style="color: black;" aria-current="page" href="venAboutUs">About Us</a></button>
 				</li>
 
@@ -38,29 +50,21 @@
 		<!-- Right elements -->
 		<div class="d-flex align-items-center ">
 
-			<ul class="navbar-nav me-auto mb-1 mb-lg-0">
 
-				<li class="nav-item">
-					<button type="button" class="btn btn-lg btn-info btn-rounded" data-mdb-ripple-init>
-						<a style="color: white;" href="/myList"><i class="fas fa-clipboard-list"></i>List of
-							Items</a></button>
-				</li>
-
-			</ul>
-
-			<button type="button" class="btn btn-lg btn-success btn-rounded" data-mdb-ripple-init>
-				<a style="color: white;" href="/addItem"><i class="fas fa-cart-plus"></i>Add item</a></button>
 			<!-- Avatar -->
 			<div class="dropdown">
 
 				<a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
 					id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
 
-					<span style="color: black; font-size: large;" th:text="${name}"></span>
-					<button type="button" class="btn btn-dark btn-floating m-l-1" data-mdb-ripple-init>
+					<div class="profile-image-container">
+						<img th:src="'data:image/jpeg;base64,' + ${venProfileImage}" class="profile-image" alt="">
+						<i class="fa fa-user fa-2x" aria-hidden="true"></i>
 
-						<i class="fas fa-user fa-2x"></i>
-					</button>
+					</div>
+
+					<span style="font-size: large; font-weight: bold; color: black; height: 30px;"
+						th:text="${vendorName}"></span>
 
 				</a>
 				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">

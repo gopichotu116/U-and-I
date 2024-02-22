@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -38,8 +39,12 @@ public class Vendor {
 	
 	@Column(nullable = false)
 	private String maps;
+	
+	@Lob
+	private byte[] profileImage;
 
-	public Vendor(String name, String email, String password, String phno, String shopName, String loc, String maps) {
+	public Vendor(String name, String email, String password, String phno, String shopName, String loc, String maps,
+			byte[] profileImage) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -48,10 +53,8 @@ public class Vendor {
 		this.shopName = shopName;
 		this.loc = loc;
 		this.maps = maps;
+		this.profileImage = profileImage;
 	}
-
-	
-	
 	
 	
 }

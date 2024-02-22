@@ -3,11 +3,10 @@
 <link>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Signup and Login Form</title>
+<title>Customer Login</title>
 
-<th:block th:insert="bootstrap"></th:block>
+<th:block th:insert="bootstrap.html"></th:block>
 
-<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 
 </head>
@@ -15,7 +14,7 @@
 <body>
 	<div class="main container d-flex">
 		<div class="login">
-			<form action="ven_loginwel" method="post">
+			<form action="cust_loginwel" method="post">
 				<label>Login</label>
 
 				<div class="errorMsg" th:if="${not #strings.isEmpty(errorMsg)}">
@@ -26,13 +25,14 @@
 					<h1 class="text-center text-success fs-5" th:text="${loginSuccess}"></h1>
 				</div>
 
-				<input type="email" name="email" id="" placeholder="Email" required="">
-				<input type="password" name="pswd" placeholder="Password" id="" required="">
+				<input type="email" name="email" placeholder="Email" required="">
+				<input type="password" name="pswd" placeholder="Password" required="">
 				<button>Login</button>
-				<p id="p2">Don't have account? <a href="vendor">Create an Account</a></p>
-				<p id="p3"><a href="/forgetPassword">forget password?</a></p>
+				<p id="p2">Don't have account? <a href="customer">Create an Account</a></p>
+				<p id="p3"><a href="/custForgetPassword">forget password?</a></p>
 			</form>
 		</div>
+
 	</div>
 </body>
 

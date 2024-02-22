@@ -5,33 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Signup and Login Form</title>
 
-<link href="/css/mdb.min.css" rel="stylesheet">
+<th:block th:insert="bootstrap"></th:block>
 
-<!--Online links -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/signup.css}">
 <style>
-	
+
 </style>
 </head>
 
 <body>
-	<!--<div th:replace="fragments/welcomeNavbar"></div>-->
-	<div class="main">
+	<div class="main container d-flex">
 		<div class="signup">
-			<form action="ven_signupwel" method="post">
-				<label>Sign up</label>
-				<input type="text" name="name" placeholder="Username" required="">
-				<input type="email" name="email" id="" placeholder="Email" required="">
-				<input type="password" name="pswd" placeholder="Password" id="" required="">
-				<input type="text" name="num" placeholder="(+91)MobileNo" id="" required>
-				<input type="text" name="shopName" placeholder="Shop Name" id="" required>
-				<input type="text" name="loc" placeholder="Shop Location" id="" required>
-				<input type="url" name="maps" placeholder="Google maps(provide short URL)" id="" required>
-				<button type="submit">Sign up</button>
+			<form action="#" th:action="@{/ven_signupwel}" th:object="${vendor}" method="post"
+				enctype="multipart/form-data">
+				<!--<form action="ven_signupwel" method="post">-->
 				<p id="p1">Already have an account <a href="vendor_login">Login</a></p>
+				<label>Sign up</label>
+
+				<input type="text" th:field="*{name}" placeholder="Username" required="">
+				<input type="email" th:field="*{email}" placeholder="Email" required="">
+
+				<label class="pswd"><a class="pswd" href="/passwordRequirements"><i
+							class="fas fa-arrow-right-to-bracket"></i> Password requirements</a></label>
+
+				<input type="password" th:field="*{password}" placeholder="Password" required="">
+				<input type="text" th:field="*{phno}" placeholder="(+91)MobileNo" required>
+
+				<input type="text" th:field="*{shopName}" placeholder="Shop Name" id="" required>
+				<input type="text" th:field="*{loc}" placeholder="Shop Location" id="" required>
+				<label class="pswd"><a class="pswd" href="https://shorturl.at/irxT9">How to shorten URL?</a></label>
+				<input type="url" th:field="*{maps}" placeholder="Google maps(provide short URL)" id="" required>
+				<input type="file" name="file">
+				<button type="submit">Sign up</button>
+
 			</form>
 		</div>
 </body>

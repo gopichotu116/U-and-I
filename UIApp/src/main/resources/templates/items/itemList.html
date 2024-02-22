@@ -7,40 +7,51 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Items List</title>
 
-	<script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
-	<link href="/css/mdb.min.css" rel="stylesheet">
-
-	<!-- Online links -->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-	
+	<th:block th:insert="bootstrap"></th:block>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
-	
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+
 	<style>
-		body{
+		body {
 			background-image: url("/images/space1.jpg");
 		}
-		.table{
+
+		.table {
 			border-collapse: collapse;
-            border-radius: 30px;
-            overflow: hidden;
+			border-radius: 30px;
+			overflow: hidden;
 		}
+		#msg{
+			font-weight: bold;
+			color: yellow;
+			position: relative;
+			top: 20px;
+			
+		}
+			
 	</style>
-	
+
 </head>
 
 <body>
 
 	<div th:replace="@{fragments/searchNavbar}"></div>
-	<h1 style="text-align: center; font-weight: bold; color: white;">ITMES LIST</h1>
+	<h1 th:text="${shopName}" style="text-align: center; font-weight: bold; color: white;"></h1>
 	<div class="container-fluid d-flex my-5 col-md-14 table-responsive rounded">
 		<!--overflow-x: auto;-->
-		<table class="table rounded-table table-bordered  border-dark table-striped table-hover overflow-x:auto; table-sm">
+		
+		<div class="msg" th:if="${not #strings.isEmpty(editSuccess)}">
+			<h1 class="text-center text-success fs-5" th:text="${editSuccess}"></h1>
+		</div>
+		
+		<table
+			class="table rounded-table table-bordered  border-dark table-striped table-hover overflow-x:auto; table-sm">
 			<thead class="table-primary">
 				<tr>
 					<!--<th scope="col" class="edit">Id</th>-->
-					<th scope="col" class="edit">Name</th>
-					<th scope="col" class="edit">Price</th>
-					<th scope="col" class="edit">Quantity</th>
+					<th scope="col" class="edit">Item Name</th>
+					<th scope="col" class="edit">Price/1 q'ty</th>
+					<th scope="col" class="edit">Avl Q'ty</th>
 					<th scope="col" class="edit">Edit</th>
 					<th scope="col" class="edit">Delete</th>
 				</tr>
@@ -58,7 +69,7 @@
 					</td>
 					<td><a style="color:red" th:href="@{/deleteItem/{id}(id=${i.id})}"><i
 								class="fa-solid fa-trash"></i></a></td>
-					
+
 				</tr>
 			</tbody>
 		</table>

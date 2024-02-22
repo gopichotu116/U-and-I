@@ -30,7 +30,7 @@
 <body>
 
 	<div th:replace="fragments/custShopItemsSearchNavbar"></div>
-	<h1 style="text-align: center; font-weight: bold; color: white;">ITEMS LIST</h1>
+	<h1 th:text="${vendor.shopName}" class="text-center" style="font-weight: bold; color: white;"></h1>
 	<div class="container-fluid d-flex my-5 col-md-14 table-responsive rounded">
 		<!--overflow-x: auto;-->
 		<table
@@ -38,7 +38,7 @@
 			<thead class="table-primary">
 				<tr>
 					<!--<th scope="col" class="edit">Id</th>-->
-					<th scope="col" class="edit">Name</th>
+					<th scope="col" class="edit">Product Name</th>
 					<th scope="col" class="edit">Price/1 q'ty</th>
 					<th scope="col" class="edit">Available q'ty</th>
 				</tr>
@@ -53,7 +53,8 @@
 			</tbody>
 		</table>
 	</div>
-
+	
+	<iframe th:src="${vendor.maps}" class="container-fluid d-flex h-100" frameborder="0" style="border:0;"></iframe>
 	<div th:replace="fragments/footer"></div>
 
 	<script src="/js/mdb.umd.min.js"></script>

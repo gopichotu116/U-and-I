@@ -29,7 +29,7 @@
 <body>
 
 	<div th:replace="fragments/customerSearchNavbar"></div>
-	<h1 style="text-align: center; font-weight: bold; color: white;">ITMES LIST</h1>
+	<h1 style="text-align: center; font-weight: bold; color: white;">ITEMS LIST</h1>
 	<div class="container my-5 col-md-14 table-responsive rounded">
 		<!--overflow-x: auto;-->
 		<table class="table table-bordered border-dark table-striped table-hover overflow-x:auto; table-sm">
@@ -37,11 +37,11 @@
 				<tr>
 					<!--<th scope="col" class="edit">Id</th>-->
 					<th scope="col" class="edit">Product Name</th>
-					<th scope="col" class="edit">Price</th>
-					<th scope="col" class="edit">Quant</th>
+					<th scope="col" class="edit">Price/1 q'ty</th>
+					<th scope="col" class="edit">Avl Q'ty</th>
 					<th scope="col" class="edit">ShopName</th>
 					<!--<th scope="col" class="edit">Location</th>-->
-					<th scope="col" class="edit">Map Link</th>
+					<th scope="col" class="edit">Location</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -55,6 +55,7 @@
 					<td class="tdname">
 						<iframe th:src="${i.vendor.maps}" width="200" height="40" frameborder="0"
 							style="border:0;"></iframe>
+							<!--<a th:href="${url}">url</a>-->
 					</td>
 				</tr>
 				

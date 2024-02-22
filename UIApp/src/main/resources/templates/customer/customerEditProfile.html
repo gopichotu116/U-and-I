@@ -6,38 +6,8 @@
 <title>Profile Edit</title>
 <th:block th:insert="bootstrap.html"></th:block>
 <link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/profileEdit.css}">
 
-<style>
-	body {
-		background-image: url("/images/profile1.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-	}
-
-	.col-md-4 {
-		position: relative;
-		top: 0px;
-	}
-
-	h1 {
-		font-weight: bold;
-		color: aliceblue;
-	}
-
-	.form-label {
-		color: ghostwhite;
-		font-weight: bold;
-
-	}
-
-	.form-control {
-		height: 45px;
-		font-size: large;
-		font-weight: bold;
-	}
-
-</style>
 </head>
 
 <body>
@@ -60,8 +30,9 @@
 				</label> <input type="email" class="form-control" name="email" th:value="${custProfile.email}" readonly>
 			</div>
 			<div class="mb-1">
-				<label for="password" class="form-label">Password
-				</label> <input type="password" class="form-control" name="password" th:value="${custProfile.password}">
+				<label for="password" class="form-label">Password 
+				</label> <label class="pswd"><a style="color: black; font-weight: bold;" href="\passwordRequirements"><i class="fas fa-arrow-right-to-bracket"></i> Password requirements</a></label>
+				 <input type="password" class="form-control" name="password" th:value="${custProfile.password}">
 
 			</div>
 
@@ -76,7 +47,7 @@
 			</div>
 
 			<div class="mb-3">
-				<label for="phno" class="form-label">Edit Pic
+				<label for="pic" class="form-label">Edit Pic
 				</label> <input type="file" class="form-control" name="file" th:value="${custProfile.profileImage}">
 			</div>
 
