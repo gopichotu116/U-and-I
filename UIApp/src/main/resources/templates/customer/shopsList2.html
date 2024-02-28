@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Shops List</title>
-	<th:block th:insert="bootstrap.html"></th:block>
+	<th:block th:insert="bootstrap"></th:block>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
 	<style>
 		body {
@@ -29,6 +29,22 @@
 			color: black;
 		}
 
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Apply fade-in animation to cards */
+		.card.custom-card {
+			animation: fadeIn 0.5s ease-out;
+		}
 	</style>
 </head>
 
@@ -39,21 +55,20 @@
 	<div class="container-fluid d-flex justify-content-center">
 		<div class="row">
 			<!-- Loop through objects and generate cards -->
-			<div th:each="v : ${vendors}">
-				<div class="col-md-4">
-					<div class="card custom-card">
-						<div class="card-body text-center">
+			<div th:each="v : ${vendors}" class="col-md-4">
+				<div class="card custom-card">
+					<div class="card-body text-center">
 
-							<h4 style="font-weight: bold; color: black;"><span th:text="${v.shopName}"></span></h4>
-							<h6>Location: <span th:text="${v.loc}"></span></h6>
-							<a th:href="@{/shopItems/{id}(id=${v.id})}" class="btn btn-success btn-rounded">Shop
-								items</a>
-						</div>
+						<h4 style="font-weight: bold; color: black;"><span th:text="${v.shopName}"></span></h4>
+						<h6>Location: <span th:text="${v.loc}"></span></h6>
+						<a th:href="@{/shopItems/{id}(id=${v.id})}" class="btn btn-primary btn-rounded">Shop items</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 
 	<div th:replace="fragments/footer"></div>
 

@@ -32,15 +32,15 @@
 	<h1 style="text-align: center; font-weight: bold; color: white;">ITEMS LIST</h1>
 	<div class="container my-5 col-md-14 table-responsive rounded">
 		<!--overflow-x: auto;-->
-		<table class="table table-bordered border-dark table-striped table-hover overflow-x:auto; table-sm">
-			<thead class="table-success">
+		<table class="table border-dark table-striped table-hover overflow-x:auto; table-sm">
+			<thead class="table-secondary">
 				<tr>
 					<!--<th scope="col" class="edit">Id</th>-->
 					<th scope="col" class="edit">Product Name</th>
 					<th scope="col" class="edit">Price/1 q'ty</th>
 					<th scope="col" class="edit">Avl Q'ty</th>
+					<th scope="col" class="edit">Add to Cart</th>
 					<th scope="col" class="edit">ShopName</th>
-					<!--<th scope="col" class="edit">Location</th>-->
 					<th scope="col" class="edit">Location</th>
 				</tr>
 			</thead>
@@ -50,15 +50,16 @@
 					<td class="tdname" th:text="${i.name}"></td>
 					<td th:text="${i.price}"></td>
 					<td th:text="${i.quantity}"></td>
+					<td><a class="btn btn-warning btn-sm" th:href="@{/cart/{id}(id=${i.id})}">Add To Cart</a>
+					</td>
 					<td th:text="${i.vendor.shopName}"></td>
 
 					<td class="tdname">
 						<iframe th:src="${i.vendor.maps}" width="200" height="40" frameborder="0"
 							style="border:0;"></iframe>
-							<!--<a th:href="${url}">url</a>-->
 					</td>
 				</tr>
-				
+
 			</tbody>
 		</table>
 	</div>

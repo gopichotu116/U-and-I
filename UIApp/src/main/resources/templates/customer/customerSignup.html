@@ -14,19 +14,22 @@
 <body>
 	<div class="parent container d-flex">
 		<div class="signup">
-			<form action="#" th:action="@{/cust_signupwel}" th:object="${customer}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/cust_signupwel}" th:object="${customer}" method="post"
+				enctype="multipart/form-data">
 				<label>Sign up</label>
-				
+
 				<input type="text" th:field="*{name}" placeholder="Username" required="">
 				<input type="email" th:field="*{email}" placeholder="Email" required="">
-				
-				<label class="pswd"><a class="pswd" href="/passwordRequirements"><i class="fas fa-arrow-right-to-bracket"></i> Password requirements</a></label>
-				
+
+				<label class="pswd"><a class="pswd" href="/passwordRequirements"><i
+							class="fas fa-arrow-right-to-bracket"></i> Password requirements</a></label>
+
 				<input type="password" th:field="*{password}" placeholder="Password" required="">
 				<input type="text" th:field="*{phno}" placeholder="(+91)MobileNo" required>
 				<input type="text" th:field="*{loc}" placeholder="Location" required>
 				<input type="file" name="file">
-				<button type="submit">Sign up</button>
+				
+				<button type="submit" class="ui-btn">Sign up</button>
 				<p id="p2">Already have an account? <a href="/customer_login">Login</a></p>
 			</form>
 		</div>

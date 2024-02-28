@@ -37,6 +37,8 @@ public class VendorController {
 	byte[] venProfileImage;
 
 	String name;
+	
+	/**----------------------------- Model attribute ---------------------------------- */
 
 	@ModelAttribute("vendorName")
 	public String addNameAttribute() {
@@ -49,7 +51,7 @@ public class VendorController {
 		return venProfileImage != null ? Base64.getEncoder().encodeToString(venProfileImage) : "";
 	}
 
-	/*----------------------------- Vendor Home ---------------------------------- */
+	/**----------------------------- Vendor Home ---------------------------------- */
 
 	@GetMapping("/vendor_home")
 	public String vendorHome(Model model) {
@@ -64,7 +66,7 @@ public class VendorController {
 		return "vendor/aboutUs";
 	}
 
-	/*----------------------------- SignUp ---------------------------------- */
+	/**----------------------------- SignUp ---------------------------------- */
 
 	@GetMapping("/vendor")
 	public String vendor(Vendor vendor) {
@@ -87,7 +89,7 @@ public class VendorController {
 
 	}
 
-	/*----------------------------- Login ---------------------------------- */
+	/**----------------------------- Login ---------------------------------- */
 
 	@GetMapping("/vendor_login")
 	public String ven_login() {
@@ -115,11 +117,21 @@ public class VendorController {
 		}
 	}
 
-	/*----------------------------- Items ---------------------------------- */
+	/**----------------------------- Items ---------------------------------- */
 
 	@GetMapping("/addItem")
 	public String addItems(Model model) {
 		return "items/addItem";
+	}
+	
+	@PostMapping("/saveEditedItem")
+	public String updateEditedItem(@ModelAttribute Items item, Model model) {
+		Vendor vendor = venService.getVendorByEmail(userName);
+		item.setVendor(vendor);
+		itemService.save(item);
+//		model.addAttribute("addSuccess", "Item added successfully");
+		model.addAttribute("editSuccess", "Item edited successfully");
+		return "redirect:/myList";
 	}
 
 	@PostMapping("/saveItem")
@@ -154,7 +166,7 @@ public class VendorController {
 		return new ModelAndView("/items/itemList", "item", items);
 	}
 
-	/* --------------------- Edit Item ---------------------- */
+	/**------------------------- Edit Item ---------------------- */
 
 	@RequestMapping("/editList/{id}")
 	public String editList(@PathVariable("id") int id, Model model) {
@@ -165,7 +177,7 @@ public class VendorController {
 
 	}
 
-	/* --------------------- Delete Item ---------------------- */
+	/**--------------------- Delete Item ------------------------ */
 
 	@GetMapping("/deleteItem/{id}")
 	public String deleteItem(@PathVariable("id") int id) {
@@ -173,7 +185,7 @@ public class VendorController {
 		return "redirect:/myList";
 	}
 
-	/*----------------------------- Vendor Profile ---------------------------------- */
+	/**----------------------------- Vendor Profile ---------------------------------- */
 
 	@GetMapping("/vendorProfile")
 	public String myProfile(Model model) {
@@ -219,14 +231,14 @@ public class VendorController {
 		}
 	}
 
-	/* --------------------- Forget password ---------------------- */
+	/**--------------------- Forget password ---------------------- */
 
 	@GetMapping("/forgetPassword")
 	public String forgetPass() {
 		return "/vendor/forgetPassword";
 	}
 
-	/*----------------------------- Password Validation ---------------------------------- */
+	/**----------------------------- Password Validation ---------------------------------- */
 
 	public boolean passValidation(String pass) {
 		String regexp = "(?=.*[A-Z])(?=.*[!@#$%^&*()])(?=.*[0-9]).{5,16}";

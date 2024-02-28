@@ -8,14 +8,17 @@
 	<title>Items List</title>
 
 	<th:block th:insert="bootstrap"></th:block>
+	
 	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
-
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">
 	<style>
+		
 		body {
 			background-image: url("/images/space1.jpg");
 		}
-
+		
+		
 		.table {
 			border-collapse: collapse;
 			border-radius: 30px;
@@ -43,9 +46,9 @@
 		<div class="msg" th:if="${not #strings.isEmpty(editSuccess)}">
 			<h1 class="text-center text-success fs-5" th:text="${editSuccess}"></h1>
 		</div>
-		
+		<!--table-bordered-->
 		<table
-			class="table rounded-table table-bordered  border-dark table-striped table-hover overflow-x:auto; table-sm">
+			class="table rounded-table  border-dark table-striped table-hover overflow-x:auto; table-sm">
 			<thead class="table-primary">
 				<tr>
 					<!--<th scope="col" class="edit">Id</th>-->

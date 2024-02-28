@@ -8,6 +8,7 @@
     
     <th:block th:insert="bootstrap"></th:block>
     <link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profile.css}">
     
     <title>Edit Item</title>
     <style>
@@ -34,7 +35,7 @@
         .form-control {
             font-size: large;
             font-weight: bold;
-            margin-bottom: 15px; /* Reduce the bottom margin */
+            margin-bottom: 15px;
         }
         .form-label{
             font-size: large;
@@ -53,7 +54,7 @@
 
 <div class="container my-2 p-3" style="">
     <h1 class="text-center text-dark">Edit Item Here</h1>
-    <form class="col-md-4 offset-md-4" th:action="@{/saveItem}" method="post" th:object="${item}">
+    <form class="col-md-4 offset-md-4" th:action="@{/saveEditedItem}" method="post" th:object="${item}">
 
         <input type="hidden" name="id" th:value="${item.id}" />
         <div class="mb-1">
@@ -71,7 +72,7 @@
             </label> <input type="text" class="form-control" name="quantity" th:value="${item.quantity}">
         </div>
 
-        <center><button type="submit" class="btn btn-primary">Submit</button></center>
+        <center><button type="submit" class="btn btn-primary text-light">Submit</button></center>
     </form>
 </div>
 

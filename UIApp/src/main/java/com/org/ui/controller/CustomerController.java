@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.org.ui.entity.Cart;
 import com.org.ui.entity.Customer;
 import com.org.ui.entity.Items;
 import com.org.ui.entity.Vendor;
+import com.org.ui.service.CartService;
 import com.org.ui.service.CustomerService;
 import com.org.ui.service.EmailService;
 import com.org.ui.service.ItemService;
@@ -32,6 +34,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService custService;
+	
+	@Autowired
+	private CartService cartService;
 
 	@Autowired
 	private VendorService venService;
@@ -40,29 +45,32 @@ public class CustomerController {
 	private ItemService itemService;
 
 	private String userName;
-	
+
 	private String name;
 
 	byte[] profileImage;
 
 	private final EmailService emailService;
+	
 
 	public CustomerController(EmailService emailService) {
 		this.emailService = emailService;
 	}
 	
+	/**--------------------------- Model Attributes-------------------------*/
+
 	@ModelAttribute("name")
-    public String addNameAttribute() {
-        String userName = name;
-        return userName;
-    }
-	
+	public String addNameAttribute() {
+		String userName = name;
+		return userName;
+	}
+
 	@ModelAttribute("profileImage")
 	public String addImageAttribute() {
 		return profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "";
 	}
 
-	/*------------------------------ SignUp ------------------------------- */
+	/**------------------------------ SignUp ------------------------------- */
 
 	@GetMapping("/customer")
 	public String customer(Customer customer) {
@@ -70,7 +78,8 @@ public class CustomerController {
 	}
 
 	@PostMapping("/cust_signupwel")
-	public String custSignup(@RequestParam("file") MultipartFile file, Customer customer, Model model) throws IOException {
+	public String custSignup(@RequestParam("file") MultipartFile file, Customer customer, Model model)
+			throws IOException {
 		if (!file.isEmpty()) {
 			customer.setProfileImage(file.getBytes());
 		}
@@ -80,12 +89,11 @@ public class CustomerController {
 			model.addAttribute("loginSuccess", "Your account is created");
 			return "customer/customerLogin";
 		}
-		return "redirect:/passwordRequirements";
+		return "/fragments/passwordRequirements";
 
 	}
-	
-	
-	/*----------------------------- Login ---------------------------------- */
+
+	/**----------------------------- Login ---------------------------------- */
 
 	@GetMapping("/customer_login")
 	public String cus_login() {
@@ -101,38 +109,71 @@ public class CustomerController {
 			model.addAttribute("profileImage",
 					profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
 			userName = customer.getEmail();
-			name=customer.getName();
+			name = customer.getName();
 			model.addAttribute("name", name);
-			
 			model.addAttribute("loginSuccess", "Your account is created");
 			model.addAttribute("customer", customer);
 			return "customer/customerHome";
-		}
-		else {
-			
+		} else {
+
 			model.addAttribute("errorMsg", "Incorrect password/email");
 			return "/customer/customerLogin";
-			
+
 		}
+	}
+
+	/**----------------------------- Customer Home ---------------------------------- */
+	
+	@GetMapping("/cust_home")
+	public String customerHome(Model model) {
+		return "/customer/customerHome";
+	}
+
+	
+	@GetMapping("/custAboutUs")
+	public String aboutUs(Model model) {
+		return "customer/aboutUs";
 	}
 	
 	@GetMapping("/passwordRequirements")
 	public String pswdReq() {
 		return "/fragments/passwordRequirements";
 	}
+	
+	/**----------------------------- Cart ---------------------------------- */
 
-	/*----------------------------- Customer Home ---------------------------------- */
-	@GetMapping("/cust_home")
-	public String customerHome(Model model) {
-		return "/customer/customerHome";
+	@GetMapping("/cart/{id}")
+	public String myCart(@PathVariable("id") int id, Model model) {
+		Items items = itemService.getItemById(id);
+		Customer customer = custService.getCustomerByEmail(userName);
+		Cart cart=new Cart();
+		cart.setName(items.getName());
+		cart.setPrice(items.getPrice());
+		cart.setQuantity(items.getQuantity());
+		cart.setCustomer(customer);
+		cartService.save(cart);
+		System.out.println(cart);
+		return "redirect:/cartList";
 	}
-
-	@GetMapping("/custAboutUs")
-	public String aboutUs(Model model) {
-		return "customer/aboutUs";
+	
+	@GetMapping("/cartList")
+	public String cartItems(Model model) {
+		Customer customer = custService.getCustomerByEmail(userName);
+		List<Cart> cartList = cartService.getItemsByCustomerId(customer.getId());
+//		List<Cart> cartList = cartService.getAllItems();
+		System.out.println("List "+cartList);
+		model.addAttribute("cartItems", cartList);
+		return "customer/cartList";
 	}
-
-	/*----------------------------- Search Location ---------------------------------- */
+	
+	@GetMapping("/deleteCartItem/{id}")
+	public String deleteCartItem(@PathVariable("id") int id, Model model) {
+		cartService.deleteItemById(id);
+		return "redirect:/cartList";
+	}
+	
+	
+	/**----------------------------- Search Location ---------------------------------- */
 
 	@PostMapping("/searchLoc")
 	public String getShopNamesByLoc(@RequestParam("loc") String loc, Model model) {
@@ -145,13 +186,13 @@ public class CustomerController {
 		return "customer/noShops";
 	}
 
-	/*----------------------------- Search Items ---------------------------------- */
-	
+	/**----------------------------- Search Items ---------------------------------- */
+
 	int vendorId;
-	
+
 	@GetMapping("/shopItems/{id}")
 	public String getShopItems(@PathVariable("id") int id, Model model) {
-		vendorId=id;
+		vendorId = id;
 		List<Items> itemsList = itemService.getItemsByVendorShopName(id);
 		Vendor vendor = venService.getVendorById(id);
 		model.addAttribute("vendor", vendor);
@@ -159,19 +200,17 @@ public class CustomerController {
 		model.addAttribute("shopItemsList", itemsList);
 		return "customer/shopItemsList";
 	}
+
 	@PostMapping("/searchItemInShop")
 	public ModelAndView searchItemInShop(@RequestParam("value") String value, Model model) {
-		List<Items> itemsList = itemService.getListByItem(value);
-//		itemService.getItmesListByVendorShopName(value);
 		Vendor vendor = venService.getVendorById(vendorId);
 		model.addAttribute("vendor", vendor);
 		List<Items> items = itemService.findItemByVendorIdAndValue(vendorId, value);
 		System.out.println(items);
 		return new ModelAndView("/customer/searchShopItems", "items", items);
-//		return "customer/searchShopItems";
 	}
 
-	/*----------------------------- Customer Search Item ---------------------------------- */
+	/**----------------------------- Customer Search Item ---------------------------------- */
 
 	@PostMapping("/custSearchItem")
 	public String customerSearchItem(@RequestParam("item") String item, Model model) {
@@ -180,7 +219,7 @@ public class CustomerController {
 		return "customer/searchItem";
 	}
 
-	/*----------------------------- Customer Profile ---------------------------------- */
+	/**----------------------------- Customer Profile ---------------------------------- */
 
 	@GetMapping("/custProfile")
 	public String customerProfile(Model model) {
@@ -197,7 +236,7 @@ public class CustomerController {
 	public String editCustomer(@PathVariable("id") int id, Model model) {
 		Customer customer = custService.getCustomerById(id);
 		model.addAttribute("custProfile", customer);
-		
+
 		return "customer/customerEditProfile";
 	}
 
@@ -207,15 +246,15 @@ public class CustomerController {
 		model.addAttribute("custProfile", customer);
 		if (passValidation(customer.getPassword())) {
 			customer.setProfileImage(file.getBytes());
-			
+
 			profileImage = custService.getProfileImage(customer.getId());
 			model.addAttribute("profileImage",
 					profileImage != null ? Base64.getEncoder().encodeToString(profileImage) : "");
 			custService.updateVendor(customer);
-			
+
 			return "redirect:/custProfile";
 		}
-		return "redirect:/passwordRequirements";
+		return "/fragments/passwordRequirements";
 	}
 
 	@PostMapping("/custChangePass")
@@ -224,8 +263,7 @@ public class CustomerController {
 		if (customer == null) {
 			model.addAttribute("invalidEmail", "Invalid email address");
 			return "customer/forgetPassword";
-		}
-		else {
+		} else {
 			model.addAttribute("password", customer.getPassword());
 			return "customer/forgetPassword";
 		}
@@ -235,8 +273,9 @@ public class CustomerController {
 	public String forgetPass() {
 		return "/customer/forgetPassword";
 	}
+	
 
-	/*----------------------------- Password Validation ---------------------------------- */
+	/**----------------------------- Password Validation ---------------------------------- */
 
 	public boolean passValidation(String pass) {
 		String regexp = "(?=.*[A-Z])(?=.*[!@#$%^&*()])(?=.*[0-9]).{5,16}";

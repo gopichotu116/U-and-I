@@ -24,17 +24,17 @@
 						<a style="color: white;" aria-current="page" href="/cust_home"><i
 								class="fas fa-house"></i>HOME</a></button>
 				</li>
-				
+
 				<li class="nav-item">
-					<button type="button" class="btn m-1 btn-lg btn-secondary btn-rounded" data-mdb-ripple-init>
-						<a style="color: black;" aria-current="page" href="custAboutUs">My Cart</a></button>
+					<button type="button" class="btn m-1 btn-lg btn-success btn-rounded" data-mdb-ripple-init>
+						<a style="color: white;" aria-current="page" href="cartList"><i
+								class="fas fa-cart-arrow-down"></i>My Cart</a></button>
 				</li>
-				
+
 				<li class="nav-item">
 					<button type="button" class="btn m-1 btn-lg btn-secondary btn-rounded" data-mdb-ripple-init>
 						<a style="color: black;" aria-current="page" href="custAboutUs">About Us</a></button>
 				</li>
-
 
 			</ul>
 			<!-- Left links -->
@@ -54,12 +54,11 @@
 
 			<a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
 				id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-				
-				
+
+
 				<div class="profile-image-container">
 					<!--<img th:src="'data:image/jpeg;base64,' + ${profileImage}" class="profile-image" alt="Profile Image">-->
-					<img th:src="'data:image/jpeg;base64,' + ${profileImage}" class="profile-image" alt=""
-						>
+					<img th:src="'data:image/jpeg;base64,' + ${profileImage}" class="profile-image" alt="">
 					<i class="fa fa-user fa-2x" aria-hidden="true"></i>
 				</div>
 				<span style="font-size: large; font-weight: bold; color: black; height: 30px;" th:text="${name}"></span>

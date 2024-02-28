@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.com">
-<link>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Profile Edit</title>
+
 <th:block th:insert="bootstrap.html"></th:block>
 <link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/profileEdit.css}">
@@ -16,10 +17,11 @@
 	<div class="container my-0 p-5">
 		<h1 class="text-center">Edit Profile</h1>
 
-		<!--<form class="col-md-4 offset-md-4" th:action="@{/saveCustomer}" method="post" th:object="${custProfile}">-->
 		<form class="col-md-4 offset-md-4" th:action="@{/saveCustomer}" th:object="${custProfile}" method="post"
 			enctype="multipart/form-data">
+
 			<input type="hidden" name="id" th:value="${custProfile.id}" />
+
 			<div class="mb-1">
 				<label for="name" class="form-label">Name
 				</label> <input type="text" class="form-control" name="name" th:value="${custProfile.name}">
@@ -29,10 +31,12 @@
 				<label for="email" class="form-label">Email
 				</label> <input type="email" class="form-control" name="email" th:value="${custProfile.email}" readonly>
 			</div>
+
 			<div class="mb-1">
-				<label for="password" class="form-label">Password 
-				</label> <label class="pswd"><a style="color: black; font-weight: bold;" href="\passwordRequirements"><i class="fas fa-arrow-right-to-bracket"></i> Password requirements</a></label>
-				 <input type="password" class="form-control" name="password" th:value="${custProfile.password}">
+				<label for="password" class="form-label">Password
+				</label> <label class="pswd"><a style="color: black; font-weight: bold;" href="\passwordRequirements"><i
+							class="fas fa-arrow-right-to-bracket"></i> Password requirements</a></label>
+				<input type="password" class="form-control" name="password" th:value="${custProfile.password}">
 
 			</div>
 

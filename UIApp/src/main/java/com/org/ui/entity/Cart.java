@@ -16,32 +16,31 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Items {
-
+public class Cart {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
+	private int id;
+	
 	@Column(nullable = false)
 	private String name;
-
+	
 	@Column(nullable = false)
 	private double price;
-
+	
 	@Column(nullable = false)
 	private String quantity;
-
+	
+	@JoinColumn(name="c_id")
 	@ManyToOne
-	@JoinColumn(name = "v_id")
 	@Cascade(CascadeType.MERGE)
-	private Vendor vendor;
+	private Customer customer;
 
-	public Items(String name, double price, String quantity, Vendor vendor) {
+	public Cart(String name, double price, String quantity, Customer customer) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
-		this.vendor = vendor;
+		this.customer = customer;
 	}
-
 }

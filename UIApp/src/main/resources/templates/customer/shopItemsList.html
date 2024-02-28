@@ -10,7 +10,7 @@
 	<th:block th:insert="bootstrap"></th:block>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
-	
+
 
 	<style>
 		body {
@@ -22,7 +22,6 @@
 			border-radius: 30px;
 			overflow: hidden;
 		}
-
 	</style>
 
 </head>
@@ -33,14 +32,14 @@
 	<h1 th:text="${vendor.shopName}" style="text-align: center; font-weight: bold; color: white;"></h1>
 	<div class="container-fluid d-flex my-5 col-md-14 table-responsive rounded">
 		<!--overflow-x: auto;-->
-		<table
-			class="table rounded-table table-bordered  border-dark table-striped table-hover overflow-x:auto; table-sm">
+		<table class="table rounded-table  border-dark table-striped table-hover overflow-x:auto; table-sm">
 			<thead class="table-primary">
 				<tr>
 					<!--<th scope="col" class="edit">Id</th>-->
 					<th scope="col" class="edit">Name</th>
 					<th scope="col" class="edit">Price/1 q'ty</th>
 					<th scope="col" class="edit">Available q'ty</th>
+					<th scope="col" class="edit">Add to Cart</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,14 +47,16 @@
 					<td class="tdname" th:text="${s.name}"></td>
 					<td th:text="${s.price}"></td>
 					<td th:text="${s.quantity}"></td>
+					<td><a class="btn btn-warning btn-sm" th:href="@{/cart/{id}(id=${s.id})}">Add To Cart</a>
+					</td>
 
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	
+
 	<iframe th:src="${vendor.maps}" class="container-fluid d-flex h-100" frameborder="0" style="border:0;"></iframe>
-	<br>
+
 	<div th:replace="fragments/footer"></div>
 
 	<script src="/js/mdb.umd.min.js"></script>

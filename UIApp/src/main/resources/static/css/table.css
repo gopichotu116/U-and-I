@@ -5,6 +5,7 @@ th.edit {
 	text-align: center;
 	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
 td{
 	text-align: center;
 	font-weight: bold;
@@ -15,3 +16,53 @@ td{
 .tdname{
 	max-width: 500px;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: fadeIn;
+}
+
+/* CSS animation for bounce effect */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Apply bounce animation to table rows */
+tbody tr {
+    animation: bounce 1s ease;
+}
+
+
+/* CSS animation for grow from the center effect */
+@keyframes growFromCenter {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Apply grow from the center animation to table rows */
+tbody tr {
+    animation: growFromCenter 0.5s ease-out;
+}
+
