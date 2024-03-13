@@ -9,14 +9,13 @@
 
 <link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/loginButton.css}">
 
 </head>
 
 <body>
 	<div class="main container d-flex">
 		<div class="login">
-			<form action="ven_loginwel" method="post">
+			<form action="/ven_loginwel" method="post">
 				<label>Login</label>
 
 				<div class="errorMsg" th:if="${not #strings.isEmpty(errorMsg)}">
@@ -32,7 +31,7 @@
 
 
 				<button>
-					Get in touch
+					Login
 					<div class="star-1">
 						<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
 							style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"

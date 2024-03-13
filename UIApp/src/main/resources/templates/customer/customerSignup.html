@@ -9,28 +9,63 @@
 
 <link rel="stylesheet" type="text/css" th:href="@{/css/signup.css}">
 
+<style>
+	.card {
+		display: none;
+		position: absolute;
+		top: 20px;
+		left: 5;
+		align-items: center;
+		background-color: #fff;
+		padding: 20px;
+		border: 1px solid #ccc;
+		border-radius: 10px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	}
+
+	.pswd {
+		position: relative;
+		left: 20px;
+	}
+
+	.pswd:hover+.card {
+		
+		position: absolute;
+		display: flex;
+		justify-content: center;
+	}
+</style>
+
 </head>
 
 <body>
 	<div class="parent container d-flex">
+
 		<div class="signup">
-			<form th:action="@{/cust_signupwel}" th:object="${customer}" method="post"
-				enctype="multipart/form-data">
+			<form th:action="@{/cust_signupwel}" th:object="${customer}" method="post" enctype="multipart/form-data">
 				<label>Sign up</label>
 
 				<input type="text" th:field="*{name}" placeholder="Username" required="">
 				<input type="email" th:field="*{email}" placeholder="Email" required="">
 
-				<label class="pswd"><a class="pswd" href="/passwordRequirements"><i
-							class="fas fa-arrow-right-to-bracket"></i> Password requirements</a></label>
+				<a class="pswd" href="#"><i class="fas fa-arrow-right-to-bracket"></i> Password requirements</a>
 
+				<div class="card">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Should be 5-16 characters.</li>
+						<li class="list-group-item">At least 1 capital letter.</li>
+						<li class="list-group-item">At least 1 special character.</li>
+						<li class="list-group-item">At least 1 digit.</li>
+					</ul>
+				</div>
+				
 				<input type="password" th:field="*{password}" placeholder="Password" required="">
 				<input type="text" th:field="*{phno}" placeholder="(+91)MobileNo" required>
 				<input type="text" th:field="*{loc}" placeholder="Location" required>
 				<input type="file" name="file">
-				
+
 				<button type="submit" class="ui-btn">Sign up</button>
-				<p id="p2">Already have an account? <a href="/customer_login">Login</a></p>
+				<p id="p2">Already have an account? <a href="/customer">Login</a></p>
 			</form>
 		</div>
 

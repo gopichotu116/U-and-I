@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cart Items List</title>
+
+	<th:block th:insert="bootstrap"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/cart.css}">
+
+</head>
+
+<body>
+
+	<div th:replace="fragments/cartNavbar"></div>
+	<h1 style="text-align: center; font-weight: bold; color: orange;">MY CART</h1>
+	<div class="container-fluid d-flex my-5 col-md-12 table-responsive rounded">
+		<!--overflow-x: auto;-->
+		<table
+			class="table rounded-table table-bordered  border-dark table-striped table-hover overflow-x:auto; table-sm animated fadeIn bounce growFromCenter">
+			<thead class="table-primary">
+				<tr>
+					<!--<th scope="col" class="edit">Id</th>-->
+					<th scope="col" class="edit">Name</th>
+					<th scope="col" class="edit">Price/1 q'ty</th>
+					<th scope="col" class="edit">Available q'ty</th>
+					<th scope="col" class="edit">ShopName</th>
+					<th scope="col" class="edit">Location</th>
+					<th scope="col" class="edit"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="c :${cartItems}">
+					<td class="tdname" th:text="${c.name}"></td>
+					<td th:text="${c.price}"></td>
+					<td th:text="${c.quantity}"></td>
+					<td th:text="${c.shopName}"></td>
+
+					<td class="tdname">
+						<iframe th:src="${c.maps}" width="200" height="40" frameborder="0"
+							style="border:0;"></iframe>
+					</td>
+					<!--<td><a style="color:red" th:href="@{/deleteCartItem/{id}(id=${c.id})}"><i
+								class="fa-solid fa-trash"></i></a></td>-->
+					
+					<td>
+						<a th:href="@{/deleteCartItem/{id}(id=${c.id})}">
+						<button class="bin-button">
+        <svg
+          class="bin-top"
+          viewBox="0 0 39 7"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line y1="5" x2="39" y2="5" stroke="white" stroke-width="4"></line>
+          <line
+            x1="12"
+            y1="1.5"
+            x2="26.0357"
+            y2="1.5"
+            stroke="white"
+            stroke-width="3"
+          ></line>
+        </svg>
+        <svg
+          class="bin-bottom"
+          viewBox="0 0 33 39"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask id="path-1-inside-1_8_19" fill="white">
+            <path
+              d="M0 0H33V35C33 37.2091 31.2091 39 29 39H4C1.79086 39 0 37.2091 0 35V0Z"
+            ></path>
+          </mask>
+          <path
+            d="M0 0H33H0ZM37 35C37 39.4183 33.4183 43 29 43H4C-0.418278 43 -4 39.4183 -4 35H4H29H37ZM4 43C-0.418278 43 -4 39.4183 -4 35V0H4V35V43ZM37 0V35C37 39.4183 33.4183 43 29 43V35V0H37Z"
+            fill="white"
+            mask="url(#path-1-inside-1_8_19)"
+          ></path>
+          <path d="M12 6L12 29" stroke="white" stroke-width="4"></path>
+          <path d="M21 6V29" stroke="white" stroke-width="4"></path>
+        </svg>
+      </button>
+					</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+
+	<script src="/js/mdb.umd.min.js"></script>
+	<script src="/js/all.min.js"></script>
+
+
+</body>
+
+</html>

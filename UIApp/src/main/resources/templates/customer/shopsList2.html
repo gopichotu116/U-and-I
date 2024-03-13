@@ -6,6 +6,7 @@
 	<title>Shops List</title>
 	<th:block th:insert="bootstrap"></th:block>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profileImage.css}">
+	<!--<link rel="stylesheet" type="text/css" th:href="@{/css/shopList.css}">-->
 	<style>
 		body {
 			background-image: url("/images/slide4.jpg");
@@ -55,7 +56,7 @@
 	<div class="container-fluid d-flex justify-content-center">
 		<div class="row">
 			<!-- Loop through objects and generate cards -->
-			<div th:each="v : ${vendors}" class="col-md-4">
+			<div th:each="v : ${vendors}" class="col-md-6">
 				<div class="card custom-card">
 					<div class="card-body text-center">
 

@@ -14,7 +14,7 @@
 
 <body>
 
-	<div th:replace="@{fragments/vendornavbar}"></div>
+	<div th:replace="fragments/vendornavbar"></div>
 	<div class="container my-0 p-5">
 		<h1 class="text-center">Edit Profile</h1>
 		<form class="col-md-4 offset-md-4" th:action="@{/saveVendor}" th:object="${venProfile}" method="post"

@@ -9,21 +9,40 @@
 <!--Online links-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 
+<link rel="stylesheet" th:href="@{/css/welcome.css}">
+
 <style>
 	body {
-		background-image: url("/images/footer4.jpg");
+		background-image: url("/images/home.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
+		background-position: center;
+		height: 100vh;
+		/* Ensures full viewport height */
+		/* Remove default margin */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 	}
-	
+
 </style>
 
 </head>
 
 <body>
 	<div class="mt-5 d-flex justify-content-center ">
-		<a href="customer" type="button" class="btn btn-primary btn-lg rounded-pill m-10">Customer</a>
-		<br><a href="vendor" type="button" class="btn btn-success btn-lg rounded-pill">Vendor</a>
+		
+		<div class="contain">
+			<div class="btn-2"><a href="/customer">CUSTOMER</a></div>
+		</div>
+
+		<div class="container-1">
+			<div class="btn-1"><a href="/vendor">VENDOR</a></div>
+		</div>
+
+		<!--<h1><a href="customer" type="button" class="btn btn-primary btn-lg rounded-pill m-10" id="a1">Customer</a></h1>-->
+		<!--<h1><a href="vendor" type="button" class="btn btn-success btn-lg rounded-pill" id="a2">Vendor</a></h1>-->
 	</div>
 </body>
 

@@ -73,8 +73,8 @@ public class CustomerController {
 	/**------------------------------ SignUp ------------------------------- */
 
 	@GetMapping("/customer")
-	public String customer(Customer customer) {
-		return "customer/customerSignup";
+	public String customer() {
+		return "customer/customerLogin";
 	}
 
 	@PostMapping("/cust_signupwel")
@@ -95,9 +95,9 @@ public class CustomerController {
 
 	/**----------------------------- Login ---------------------------------- */
 
-	@GetMapping("/customer_login")
-	public String cus_login() {
-		return "customer/customerLogin";
+	@GetMapping("/customerSignup")
+	public String customerSignup(Customer customer) {
+		return "customer/customerSignup";
 	}
 
 	@PostMapping("/cust_loginwel")
@@ -144,26 +144,30 @@ public class CustomerController {
 
 	@GetMapping("/cart/{id}")
 	public String myCart(@PathVariable("id") int id, Model model) {
-		Items items = itemService.getItemById(id);
+		Items i = itemService.getItemById(id);
+		Vendor vendor = i.getVendor();
 		Customer customer = custService.getCustomerByEmail(userName);
-		Cart cart=new Cart();
-		cart.setName(items.getName());
-		cart.setPrice(items.getPrice());
-		cart.setQuantity(items.getQuantity());
-		cart.setCustomer(customer);
+		Cart cart= new Cart(i.getName(),i.getPrice(), i.getQuantity(), vendor.getShopName(),vendor.getMaps(), customer);
+		List<Cart> list = cartService.getItemByShopNameAndItemName(vendor.getShopName(),i.getName());
+		if(!list.isEmpty()) return "redirect:/cartList";
 		cartService.save(cart);
-		System.out.println(cart);
-		return "redirect:/cartList";
+		return "redirect:/cart/{id}";
 	}
 	
 	@GetMapping("/cartList")
 	public String cartItems(Model model) {
 		Customer customer = custService.getCustomerByEmail(userName);
 		List<Cart> cartList = cartService.getItemsByCustomerId(customer.getId());
-//		List<Cart> cartList = cartService.getAllItems();
-		System.out.println("List "+cartList);
 		model.addAttribute("cartItems", cartList);
 		return "customer/cartList";
+	}
+	
+	@PostMapping("/searchItemInCart")
+	public String searchItemInCart(@RequestParam("value")String value, Model model) {
+		Customer customer = custService.getCustomerByEmail(userName);
+		List<Cart> cartList = cartService.getItemsByCustomerIdAndValue(customer.getId(),value);
+		model.addAttribute("cartItems", cartList);
+		return "customer/cartSearchItems";
 	}
 	
 	@GetMapping("/deleteCartItem/{id}")
@@ -206,7 +210,6 @@ public class CustomerController {
 		Vendor vendor = venService.getVendorById(vendorId);
 		model.addAttribute("vendor", vendor);
 		List<Items> items = itemService.findItemByVendorIdAndValue(vendorId, value);
-		System.out.println(items);
 		return new ModelAndView("/customer/searchShopItems", "items", items);
 	}
 

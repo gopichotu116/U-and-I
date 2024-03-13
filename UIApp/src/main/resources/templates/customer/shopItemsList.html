@@ -47,7 +47,7 @@
 					<td class="tdname" th:text="${s.name}"></td>
 					<td th:text="${s.price}"></td>
 					<td th:text="${s.quantity}"></td>
-					<td><a class="btn btn-warning btn-sm" th:href="@{/cart/{id}(id=${s.id})}">Add To Cart</a>
+					<td><a class="btn btn-warning btn-sm" th:href="@{/cart/{id}(id=${s.id})}" onclick="gopi()">Add To Cart</a>
 					</td>
 
 				</tr>
@@ -61,7 +61,11 @@
 
 	<script src="/js/mdb.umd.min.js"></script>
 	<script src="/js/all.min.js"></script>
-
+	<script>
+		function gopi(){
+			window.alert('Item added to cart')
+		}
+	</script>
 
 </body>
 

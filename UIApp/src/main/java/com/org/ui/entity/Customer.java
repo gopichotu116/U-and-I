@@ -46,6 +46,4 @@ public class Customer {
 		this.profileImage = profileImage;
 	}
 
-	
-	
 }

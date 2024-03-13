@@ -172,7 +172,6 @@ public class VendorController {
 	public String editList(@PathVariable("id") int id, Model model) {
 		Items i = itemService.getItemById(id);
 		model.addAttribute("item", i);
-		System.out.println(i);
 		return "items/editItem";
 
 	}

@@ -1,86 +1,70 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-secondary sticky-top " style="background-color: #F5F5F5">
-	<!-- Container wrapper -->
-	<div class="container-fluid">
-		<!-- Toggle button -->
-		<button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<i class="fas fa-bars"></i>
-		</button>
+<nav class="navbar navbar-expand-lg navbar-secondary sticky-top" style="background-color: #F5F5F5">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
 
-		<!-- Collapsible wrapper -->
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<!-- Navbar brand -->
-			<a class="navbar-brand mt-2 mt-lg-0">
-				<img class="image rounded" src="/images/shop2.jpg" height="80" width="100" alt="LM Logo"
-					loading="lazy" />
-			</a>
-			<!-- Left links -->
-			<!--Moved to right side-->
-			<ul class="navbar-nav me-auto mb-1 mb-lg-0">
-				<li class="nav-item">
-					<!--<a class="nav-link" aria-current="page" href="/">Home</a>-->
-					<button type="button" class="btn btn-lg m-1 btn-warning btn-rounded" data-mdb-ripple-init>
-						<a style="color: white;" aria-current="page" href="/vendor_home"><i
-								class="fas fa-house"></i>HOME</a></button>
-				</li>
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0">
+                <img class="image rounded" src="/images/shop2.jpg" height="80" width="100" alt="LM Logo" loading="lazy" />
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-1 mb-lg-0">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-lg m-1 btn-warning btn-rounded" data-mdb-ripple-init>
+                        <a style="color: white;" aria-current="page" href="/vendor_home"><i class="fas fa-house"></i>HOME</a>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-lg m-1 btn-info btn-rounded" data-mdb-ripple-init>
+                        <a style="color: white;" href="/myList"><i class="fas fa-clipboard-list"></i>List of Items</a>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-lg m-1 btn-success btn-rounded" data-mdb-ripple-init>
+                        <a style="color: white;" href="/addItem"><i class="fas fa-cart-plus"></i>Add item</a>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-lg m-1 btn-secondary btn-rounded" data-mdb-ripple-init>
+                        <a style="color: black;" aria-current="page" href="/venAboutUs">About Us</a>
+                    </button>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
 
-				<ul class="navbar-nav me-auto mb-1 mb-lg-0">
-
-					<li class="nav-item">
-						<button type="button" class="btn btn-lg m-1 btn-info btn-rounded" data-mdb-ripple-init>
-							<a style="color: white;" href="/myList"><i class="fas fa-clipboard-list"></i>
-								List of Items</a></button>
-					</li>
-
-				</ul>
-
-				<button type="button" class="btn btn-lg m-1 btn-success btn-rounded" data-mdb-ripple-init>
-					<a style="color: white;" href="/addItem"><i class="fas fa-cart-plus"></i>Add item</a></button>
-
-				<li class="nav-item">
-					<button type="button" class="btn btn-lg m-1 btn-secondary btn-rounded" data-mdb-ripple-init>
-						<a style="color: black;" aria-current="page" href="venAboutUs">About Us</a></button>
-				</li>
-
-			</ul>
-			<!-- Left links -->
-		</div>
-		<!-- Collapsible wrapper -->
-		<!-- Right elements -->
-		<div class="d-flex align-items-center ">
-
-
-			<!-- Avatar -->
-			<div class="dropdown">
-
-				<a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-					id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
-
-					<div class="profile-image-container">
-						<img th:src="'data:image/jpeg;base64,' + ${venProfileImage}" class="profile-image" alt="">
-						<i class="fa fa-user fa-2x" aria-hidden="true"></i>
-
-					</div>
-
-					<span style="font-size: large; font-weight: bold; color: black; height: 30px;"
-						th:text="${vendorName}"></span>
-
-				</a>
-				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-
-					<li>
-						<a class="dropdown-item" href="/vendorProfile">Profile</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="/welcome">Logout</a>
-					</li>
-
-				</ul>
-			</div>
-		</div>
-		<!-- Right elements -->
-	</div>
-	<!-- Container wrapper -->
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+            <!-- Avatar -->
+            <div class="dropdown">
+                <a data-mdb-dropdown-init class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
+                    id="navbarDropdownMenuAvatar" role="button" aria-expanded="false">
+                    <div class="profile-image-container">
+                        <img th:src="'data:image/jpeg;base64,' + ${venProfileImage}" class="profile-image" alt="">
+                        <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <span style="font-size: large; font-weight: bold; color: black; height: 30px;" th:text="${vendorName}"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                    <li>
+                        <a class="dropdown-item" href="/vendorProfile">Profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/welcome">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->

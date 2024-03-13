@@ -14,4 +14,10 @@ public interface CartRepository extends JpaRepository<Cart, Integer>{
 	@Query("SELECT c FROM Cart c WHERE c.customer.id=:id")
 	List<Cart> findItemsByCustomerId(Integer id);
 
+	@Query("SELECT c FROM Cart c WHERE c.customer.id=:id AND c.name LIKE %:value%")
+	List<Cart> findItemsByCustomerIdAndValue(Integer id, String value);
+
+	@Query("SELECT c FROM Cart c WHERE c.shopName=:shopName AND c.name=:name")
+	List<Cart> findItemByShopNameAndItemName(String shopName, String name);
+
 }

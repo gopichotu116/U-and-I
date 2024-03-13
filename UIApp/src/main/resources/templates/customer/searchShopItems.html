@@ -41,6 +41,7 @@
 					<th scope="col" class="edit">Product Name</th>
 					<th scope="col" class="edit">Price/1 q'ty</th>
 					<th scope="col" class="edit">Available q'ty</th>
+					<th scope="col" class="edit">Add to Cart</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,7 +49,8 @@
 					<td class="tdname" th:text="${i.name}"></td>
 					<td th:text="${i.price}"></td>
 					<td th:text="${i.quantity}"></td>
-
+					<td><a class="btn btn-warning btn-sm" th:href="@{/cart/{id}(id=${i.id})}">Add To Cart</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

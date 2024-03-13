@@ -30,4 +30,14 @@ public class CartService {
 		return cartRepo.findItemsByCustomerId(id);
 	}
 
+
+	public List<Cart> getItemsByCustomerIdAndValue(Integer id, String value) {
+		return cartRepo.findItemsByCustomerIdAndValue(id, value);
+		
+	}
+
+	public List<Cart> getItemByShopNameAndItemName(String shopName, String name) {
+		return cartRepo.findItemByShopNameAndItemName(shopName, name);
+	}
+
 }
