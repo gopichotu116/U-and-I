@@ -14,3 +14,16 @@ body {
 .btn {
 	color: #00C853;
 }
+
+.profile-image-container {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.profile-image {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
